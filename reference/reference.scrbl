@@ -1,12 +1,11 @@
 #lang scribble/doc
 @(require scribble/manual
-          "../lang/acl2-module-v.ss"
-          "../private/planet.ss")
+          "../lang/acl2-module-v.ss")
 @(require (cce scribble))
 
 @title{Dracula: Reference Manual}
 
-@(declare-exporting/this-package [lang/acl lang/dracula] [])
+@(declare-exporting [dracula/lang/acl dracula/lang/dracula])
 
 This manual defines the ACL2 and Modular ACL2 languages provided by Dracula.
 For a gentler introduction to Dracula, see

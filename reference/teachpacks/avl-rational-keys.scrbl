@@ -1,13 +1,12 @@
 #lang scribble/doc
 @(require scribble/manual scribble/eval "../evaluator.ss")
-@(require "../../private/planet.ss")
 @(require (cce scribble))
-@(require (for-label (this-package-in lang/dracula)
-                     (this-package-in teachpacks/avl-rational-keys)))
+@(require (for-label dracula/lang/dracula
+                     dracula/teachpacks/avl-rational-keys))
 
 @title[(scheme "avl-rational-keys")]
 
-@(declare-exporting/this-package [teachpacks/avl-rational-keys] [])
+@(declare-exporting [dracula/teachpacks/avl-rational-keys])
 
 @specform[(include-book "avl-rational-keys" :dir :teachpacks)]
 

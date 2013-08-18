@@ -3,11 +3,10 @@
           scribble/eval
           "../evaluator.ss"
           "../../guide/display.ss"
-          "../../lang/acl2-module-v.ss"
-          "../../private/planet.ss")
+          "../../lang/acl2-module-v.ss")
 @(require (cce scribble))
 @(require (for-syntax scheme/base)
-          (for-label (this-package-in modular/main)))
+          (for-label dracula/modular/main))
 
 @title[#:tag "modular"]{Modular ACL2}
 
@@ -16,8 +15,7 @@ gentler introduction, see @secref["modular" #:doc (make-dracula-spec
 "guide/guide.scrbl")] in @other-manual[(make-dracula-spec
 "guide/guide.scrbl")].
 
-@(declare-exporting/this-package [modular/main] []
-                                 #:use-sources [lang/acl] [])
+@(declare-exporting [dracula/modular/main] #:use-sources [lang/acl])
 
 @section{Interfaces}
 

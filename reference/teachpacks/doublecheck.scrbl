@@ -3,14 +3,13 @@
           scribble/eval
           "../evaluator.ss"
           "../../lang/acl2-module-v.ss")
-@(require "../../private/planet.ss")
 @(require (cce scribble))
-@(require (for-label (this-package-in lang/dracula)
-                     (this-package-in teachpacks/doublecheck)))
+@(require (for-label dracula/lang/dracula
+                     dracula/teachpacks/doublecheck))
 
 @title[#:style 'quiet #:tag "doublecheck" (scheme "doublecheck")]
 
-@(declare-exporting/this-package [teachpacks/doublecheck] [])
+@(declare-exporting [dracula/teachpacks/doublecheck])
 
 @specform[(include-book "doublecheck" :dir :teachpacks)]
 

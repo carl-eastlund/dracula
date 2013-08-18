@@ -1,10 +1,9 @@
 #lang scribble/doc
 @(require scribble/manual
           "display.ss"
-          "../lang/acl2-module-v.ss"
-          "../private/planet.ss")
+          "../lang/acl2-module-v.ss")
 @(require (cce scribble))
-@(require (for-label (this-package-in modular/main)))
+@(require (for-label dracula/modular/main)))
 
 @title[#:tag "modular"]{Modular ACL2}
 
@@ -322,7 +321,7 @@ see some extra lines at the top:
 #, @litchar{;; The first four lines of this file were added by Dracula.}
 #, @litchar{;; They tell DrScheme that this is a Dracula Modular ACL2 program.}
 #, @litchar{;; Leave these lines unchanged so that DrScheme can properly load this file.}
-#, @litchar{#reader(planet "reader.ss" ("cce" "dracula.plt") "modular" "lang")}
+#, @litchar{#reader(lib "dracula" "modular" "lang" "reader.ss")}
 (interface ITriple
   (sig triple (x))
   (con times-three

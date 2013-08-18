@@ -1,8 +1,5 @@
 #lang scribble/doc
-@(require scribble/manual planet/util)
-
-@(define maj (number->string (this-package-version-maj)))
-@(define min (number->string (this-package-version-min)))
+@(require scribble/manual)
 
 @title[#:tag "install"]{Getting Started}
 
@@ -27,15 +24,13 @@ utility. On Windows, this utility is in the directory where Racket is
 installed; on Mac or Unix, it is in the @schemefont{bin} subdirectory. To
 install Dracula using this utility, execute:
 
-@exec{planet install cce dracula.plt @|maj| @|min|}
+@exec{raco pkg install dracula}
 
 @subsubsub*section{Uninstalling Dracula}
 
 To uninstall Dracula, run the following at the command line:
 
-@exec{raco planet remove cce dracula.plt @|maj| @|min|}
-
-For other versions of Dracula, change the major and minor version numbers.
+@exec{raco pkg remove dracula}
 
 @subsubsub*section{Upgrading Dracula}
 
@@ -47,7 +42,7 @@ instructions above.
 To run a Dracula program, e.g. "@filepath{program.lisp}". from the command line,
 add the following line to the top of the main file:
 
-@schememod[(code:line planet cce/dracula)]
+@schememod[dracula]
 
 Then run:
 

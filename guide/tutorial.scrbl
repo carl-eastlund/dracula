@@ -1,10 +1,9 @@
 #lang scribble/doc
 @(require scribble/manual
           scheme/runtime-path
-          "../lang/acl2-module-v.ss"
-          "../private/planet.ss")
+          "../lang/acl2-module-v.ss")
 @(require (cce scribble))
-@(require (for-label (this-package-in lang/dracula)))
+@(require (for-label dracula/lang/dracula)))
 
 @(define-runtime-path ChosenLanguage "images/chosen-language.png")
 @(define-runtime-path fact-defn "images/fact-defn.png")

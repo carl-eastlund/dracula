@@ -2,9 +2,8 @@
 @(require scribble/manual
           scribble/eval
           "../evaluator.ss")
-@(require "../../private/planet.ss")
 @(require (cce scribble))
-@(require (for-label (this-package-in lang/dracula)))
+@(require (for-label dracula/lang/dracula))
 
 @title{Expressions}
 

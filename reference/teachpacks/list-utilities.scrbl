@@ -1,13 +1,12 @@
 #lang scribble/doc
 @(require scribble/manual scribble/eval "../evaluator.ss")
-@(require "../../private/planet.ss")
 @(require (cce scribble))
-@(require (for-label (this-package-in lang/dracula)
-                     (this-package-in teachpacks/list-utilities)))
+@(require (for-label dracula/lang/dracula
+                     dracula/teachpacks/list-utilities))
 
 @title[(scheme "list-utilities")]
 
-@(declare-exporting/this-package [teachpacks/list-utilities] [])
+@(declare-exporting [dracula/teachpacks/list-utilities])
 
 @specform[(include-book "list-utilities" :dir :teachpacks)]
 

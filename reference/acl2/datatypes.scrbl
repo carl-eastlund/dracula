@@ -1,10 +1,9 @@
 #lang scribble/doc
 @(require scribble/manual
           scribble/eval
-          "../evaluator.ss"
-          "../../private/planet.ss")
+          "../evaluator.ss")
 @(require (cce scribble))
-@(require (for-label (this-package-in lang/dracula)))
+@(require (for-label dracula/lang/dracula))
 
 @title{Data Types}
 
