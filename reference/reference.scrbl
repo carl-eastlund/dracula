@@ -1,7 +1,6 @@
 #lang scribble/doc
 @(require scribble/manual
           "../lang/acl2-module-v.ss")
-@(require (cce scribble))
 
 @title{Dracula: Reference Manual}
 

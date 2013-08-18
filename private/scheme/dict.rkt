@@ -230,9 +230,8 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(provide dict/c dict-has-key? dict-ref!)
+(provide dict/c dict-has-key? dict-ref! dict-empty?)
 (provide/contract
- [dict-empty? (-> dict? boolean?)]
  [empty-dict
   (->* []
        [#:mutable? boolean? #:weak? boolean? #:compare (or/c 'eq 'eqv 'equal)]

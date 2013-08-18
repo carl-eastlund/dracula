@@ -5,7 +5,10 @@
 
 ;; setup-plt:
 (define compile-omit-paths
-  (list "acl2/gui.rkt" "acl2/new-gui.rkt" "acl2/program-controller.rkt"))
+  (list
+    "acl2/gui.rkt"
+    "acl2/new-gui.rkt"
+    "acl2/program-controller.rkt"))
 
 ;; tools:
 

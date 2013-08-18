@@ -2,7 +2,6 @@
 @(require scribble/manual
           scribble/eval
           "../evaluator.ss")
-@(require (cce scribble))
 @(require (for-label dracula/lang/dracula))
 
 @title{Data Types}

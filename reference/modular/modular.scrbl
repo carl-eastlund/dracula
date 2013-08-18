@@ -4,7 +4,6 @@
           "../evaluator.ss"
           "../../guide/display.ss"
           "../../lang/acl2-module-v.ss")
-@(require (cce scribble))
 @(require (for-syntax scheme/base)
           (for-label dracula/modular/main))
 
@@ -15,7 +14,7 @@ gentler introduction, see @secref["modular" #:doc (make-dracula-spec
 "guide/guide.scrbl")] in @other-manual[(make-dracula-spec
 "guide/guide.scrbl")].
 
-@(declare-exporting [dracula/modular/main] #:use-sources [lang/acl])
+@(declare-exporting dracula/modular/main #:use-sources [lang/acl])
 
 @section{Interfaces}
 

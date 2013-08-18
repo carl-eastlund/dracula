@@ -1,6 +1,7 @@
 #lang racket
 
 (require syntax/moddep
+         racket/runtime-path
          (for-template racket/base))
 
 (provide acl2-module-v
@@ -15,17 +16,16 @@
 (define (make-teachpack-require-syntax file)
   (list #'lib "dracula" "teachpacks" file))
 
-(define teachpack-v (list 'lib "dracula" "teachpacks"))
-
 (define backslash-pattern #rx"\\\\")
 
 (define (backslashes->forward-slashes str)
   (regexp-replace* backslash-pattern str "/"))
 
+(define-runtime-path teachpack-v "../teachpacks")
+
 (define teachpack-path
   (string-append (backslashes->forward-slashes
-                  (path->string 
-                   (resolve-module-path teachpack-v #f)))
+                  (path->string teachpack-v))
                  "/"))
 
 (define acl2-module-v (make-dracula-spec "dracula.rkt" "lang"))

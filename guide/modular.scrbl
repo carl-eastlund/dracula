@@ -2,7 +2,6 @@
 @(require scribble/manual
           "display.ss"
           "../lang/acl2-module-v.ss")
-@(require (cce scribble))
 @(require (for-label dracula/modular/main)))
 
 @title[#:tag "modular"]{Modular ACL2}

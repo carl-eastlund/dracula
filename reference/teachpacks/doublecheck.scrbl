@@ -3,7 +3,6 @@
           scribble/eval
           "../evaluator.ss"
           "../../lang/acl2-module-v.ss")
-@(require (cce scribble))
 @(require (for-label dracula/lang/dracula
                      dracula/teachpacks/doublecheck))
 

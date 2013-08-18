@@ -2,18 +2,17 @@
 
 (require mzlib/etc
          planet/util
+         syntax/srcloc
          "checks.ss"
          "../syntax.ss")
 
 (provide syntax-suite)
 
+(define this-source (quote-source-file))
+(define-values {this-dir this-is-dir? this-file} (split-path this-source))
+
 (define here
-  (datum->syntax
-   #f
-   'here
-   (list (build-path (this-expression-source-directory)
-                     (this-expression-file-name))
-         1 1 1 1)))
+  (datum->syntax #f 'here (list this-source 1 1 1 1)))
 
 (define syntax-suite
   (test-suite "syntax.ss"
@@ -176,7 +175,7 @@
       (test-suite "syntax-source-file-name"
         (test-case "here"
           (check-equal? (syntax-source-file-name here)
-                        (this-expression-file-name)))
+                        this-file))
         (test-case "fail"
           (check-equal? (syntax-source-file-name (datum->syntax #f 'fail))
                         #f)))
@@ -184,7 +183,7 @@
       (test-suite "syntax-source-directory"
         (test-case "here"
           (check-equal? (syntax-source-directory here)
-                        (this-expression-source-directory)))
+                        this-dir))
         (test-case "fail"
           (check-equal? (syntax-source-directory (datum->syntax #f 'fail))
                         #f)))

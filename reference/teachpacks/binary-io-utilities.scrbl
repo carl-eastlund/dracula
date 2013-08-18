@@ -1,6 +1,5 @@
 #lang scribble/doc
 @(require scribble/manual scribble/eval "../evaluator.ss")
-@(require (cce scribble))
 @(require (for-label dracula/lang/dracula
                      dracula/teachpacks/binary-io-utilities))
 
