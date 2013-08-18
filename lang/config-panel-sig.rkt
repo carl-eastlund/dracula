@@ -1,0 +1,1 @@
+(module config-panel-sig (lib "a-signature.rkt") attach-config-panel!)

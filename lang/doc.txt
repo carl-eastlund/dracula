@@ -1,0 +1,169 @@
+_acl2_
+> _ACL2_Language_Level_
+
+The ACL2 language level allows you to run programs written in ACL2, a pure first-order subset of Common Lisp.  The language level provides all of the documented primitive procedures and many of the language forms (see below for a list of exceptions).  
+
+To work with ACL2 in DrScheme, select the 'Choose Language' option from DrScheme's Language menu.  In the dialog, choose 'ACL2 Beginner' and click 'OK'.
+
+You may now write ACL2 code in the definitions window and run it by clicking 'Run'.  To submit your code to ACL2, click the 'Start ACL2' button.  If DrScheme cannot find your ACL2 executable, it will ask you to locate it manually.  This choice will be cached so that you do not have to specify it again later.
+
+DrScheme will then start ACL2 and present you with a new row of buttons below 'Start ACL2':
+
+- Admit Next:  Click this to send the next expression in the definitions window to ACL2.  If ACL2 accepts the expression, it will be highlighted in green.  If ACL2 rejects the expression, it will be colored red.  You may edit red expressions and resubmit them by clicking 'Admit Next' again, but green expressions are locked.  If you wish to edit a green expression, you will have to use the 'Undo Last' button until the expression is unhighlighted.
+
+- Admit All:  This behaves as a sequence of clicks on 'Admit Next'.  The operation will stop when either all of the expressions in the definitions window have been accepted, or upon rejection of one of the expressions.  You may use the scroll bar to keep tabs on the highlighting while this operation is in progress.
+
+- Undo Last:  This will unhighlight the expression most recently highlighted green and will remove it from ACL2's database.
+
+- Undo All:  This behaves as a sequence of clicks on 'Undo Last'.  Every expression in the definitions window will be unhighlighted and ACL2 will be in a fresh state.
+
+- Save / Certify:  This button will save your file if necessary and attempt to certify it as an ACL2 book for inclusion by other Dracula/ACL2 files.  Note that not all admissible ACL2 programs can be certified as books.  See documentation for ACL2's certify-book form for more information.
+
+- Interrupt Proof:  This button will attempt to stop ACL2 during a long proof attempt, forcing failure instead of waiting for a result.
+
+- Shutdown ACL2:  This will shut down the current ACL2 session and hide these buttons.  ACL2 will still shutdown but the console will remain open for you to browse the transcript.
+
+> _Examples_
+Examples are included in the example subdirectory of this collection <PLT-installation>/collects/acl2/examples.  See the website (http://www.ccs.neu.edu/home/cce/acl2/index.html) for an extended example involving building a simple video game.
+
+> ACL2_Documentation
+You can use Help Desk to search ACL2's documentation.
+
+> _Teachpacks_&_Books_
+A teachpack is a module that inserts "foreign" functions to be used within ACL2 code.  ACL2 teachpacks consist of a pair of files:  one Scheme file that exports ACL2 functions, and one ACL2 book that enables the theorem prover to reason with these functions.  To include a teachpack in your program, use ACL2's `include-book' with the `:dir :teachpacks' location specification:
+
+In your program text, insert an include-book form before referencing any provided code:
+
+     (include-book "<name-of-book>" :dir :teachpacks)
+
+Note that <name-of-book> should *not* include the file extension.
+
+For example, suppose you wanted to include the rand book for generating random numbers in your programs.  Add the following include-book form at the top of your program:
+
+    (include-book "rand" :dir :teachpacks)
+
+> _Supported_Forms_
+The ACL2 Language level is incomplete with respect to the full version of ACL2.  We do support all of the documented primitive procedures, but we do not support all of the special forms.  In particular, most of the forms listed at http://www.cs.utexas.edu/users/moore/acl2/v3-0/EVENTS.html are NOT implemented.  
+
+Here is the list of supported forms:
+> defconst :: (defconst *name* expression)
+Constant names *must* be surrounded by asterisks.
+
+> defun :: (defun name (var ...) body)
+> defun :: (defun name (var ...) (declare (xargs :guard <expression>)) body)
+You may optionally include a (declare (xargs :guard <expression>)) in between the formal parameters and the body as usual.
+
+> defthm :: (defthm name body)
+> defthm :: (defthm name body :hints <hints>)
+> in-theory :: (in-theory (enable <name> ...))
+> in-theory :: (in-theory (disable <name> ...))
+> let
+> let*
+> and
+> or
+> if
+> cond
+> case
+> case-match
+> mv
+> mv-let
+> assert$
+
+> _State_and_IO
+We support the following subset of ACL2's IO primitives:
+
+> open-input-channel
+> open-output-channel
+> close-input-channel
+> close-output-channel
+> read-byte$
+> write-byte$
+> read-char$
+> write-char$
+
+In addition, there is functionality built on top of these primitives.  See the io-utilities teachpack and binary-io-utilities teachpack (contributed by Rex Page).
+
+In order to use state as an actual parameter or the name 'state' as a formal parameter, you must first evaluate (set-state-ok t) as usual.
+> set-state-ok :: (set-state-ok boolean)
+
+> _STOBJs_(single-threaded-objects)
+We do not support STOBJs.
+
+> _Performance_
+When developing functional code, follow a few guidelines to achieve good performance:
+1. Use accumulators properly.  See section VI of 'How to Design Programs' (http://www.htdp.org) for a introduction to this topic.
+2. Don't do superfluous argument checking.  Sometimes it's enough to weaken your theorems by inserting antecedents.
+3. Don't reimplement the built-in primitives.  Browse the index of primitives before you reimplement common functionality.  To see the index, go to the ACL2 User's Manual and click the 'PROGRAMMING' link.
+
+> _Limitations_
+> set-guard-checking :: (set-guard-checking boolean)
+We do not allow guard checks to be disabled.  Evaluating (set-guard-checking nil) will set the guard-checking parameter, but it will not prevent the checks from happening.
+
+*  We do not support ACL2 doc-strings.  You may put them in your code, but the ACL2 Language level will throw them away.
+
+* Our reader accepts decimal point notation for rational numbers, but ACL2 doesn't.  If you wish to reason about your numerical code, use numbers like 2/5 instead of 0.4.  The same limitation is true of complex numbers:  our reader accepts the Scheme notation 2+4i, but you must write #C(2 4) or (complex 2 4) for ACL2.
+
+Incomplete constructs:
+> defstructure :: (defstructure name field-spec ...)
+We support a limited version of `defstructure'.  The restricted grammar for field-spec is
+field-spec ::= name | (name (:assert <boolean-expression> [:rewrite]))
+
+A `(defstructure name field-1 field-2 ... field-k)' generates a set of functions:
+- a constructor called `name'
+- a weak predicate called `weak-name-p'
+- a predicate called `name-p'
+- one selector for each field:
+  * name-field-1, name-field-2, ..., name-field-k
+- a functional update procedure called `update-name'.  The updater consumes an instance of the structure followed by a sequence of keyword-value pairs.  For example:
+
+  (update-name (name v-1 ... v-k) :field-2 w :field-k z)
+
+produces a structure like (name v-1 ... v-k), but with `field-2' updated to w and `field-k' updated to z.
+
+For further information, see the official documentation for defstructure at:
+http://www.cs.utexas.edu/users/moore/publications/acl2-papers.html#Utilities
+
+> defmacro
+We do not currently support defmacro.
+
+> encapsulate
+> local
+We do not currently support encapsulate or local.
+
+> include-book
+
+Dracula has limited support for ACL2's include-book mechanism.  First of all, because Dracula does not ignore "redundant events" as ACL2 does, each book must be required only once in a program, including all transitively-included files.  Sometimes this requires careful reorganization of a file hierarchy.
+
+Consider the following Dracula files:
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; FILE my-program.lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(include-book "some-system-book" :dir :system)
+(include-book "my-book")
+...
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; FILE my-book.lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(in-package "ACL2")
+(include-book "some-system-book" :dir :system)
+...
+
+This program will not run in Dracula, as "some-system-book" is included twice into my-program.lisp (once directly, and once via my-book).  In this case, remove the first include-book from my-program.lisp.  Then some-system-book will be included into both files, but only once, and both will run.
+
+Other patterns may be trickier.  If my-program includes my-book and my-other-book, my-book and my-other-book cannot both include some-system-book directly.  One workaround is to rearrange the files into a chain: my-program includes my-book, which includes my-other-book, which includes some-system-book.
+
+Alternately, if the books should be kept separate, include some-system-book at the top of my-program and remove it the private books.  This makes the book available everywhere when the whole program is run, although my-book and my-other-book can no longer be run separately.  To run them, create wrapper files run-my-book and run-my-other-book that include some-system-book first, then the book in question, for testing purposes.
+
+
+Dracula supports three specific forms of include-book, described below.  Other forms are rejected, as Dracula does not include all of ACL2's books or support all inclusion mechanisms.
+
+> (include-book book-string :dir :system)
+> (include-book book-string :dir :teachpacks)
+
+These two forms of include-book load a Scheme implementation of a book.  They expect a file with the given name and ".scm" extension in Dracula's teachpacks directory.  The :system flag loads the standard ACL2 books supported by Dracula and the :teachpacks flag loads Dracula-specific teachpacks such as "world".
+
+> (include-book book-string)
+
+This form loads a Dracula book relative to the current directory.  Dracula looks for a file with the given name and ".lisp" extension and interprets its contents as Dracula ACL2 code.
