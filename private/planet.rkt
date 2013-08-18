@@ -11,23 +11,13 @@
 (define-require-syntax (cce stx)
   (syntax-parse stx
     [(_ suffix:id)
-     (define/syntax-parse path:id
-       (format-id (attribute suffix) #:source (attribute suffix)
-         "private/scheme/~a" (attribute suffix)))
-     (datum->syntax
-       stx
-       (list #'this-package-in (attribute path))
-       stx)]))
+     (format-id (attribute suffix) #:source (attribute suffix)
+       "dracula/private/scheme/~a" (attribute suffix))]))
 
 (define-require-syntax (fasttest stx)
   (syntax-parse stx
     [(_ suffix:id)
-     (define/syntax-parse path:id
-       (format-id (attribute suffix) #:source (attribute suffix)
-         "private/fasttest/~a" (attribute suffix)))
-     (datum->syntax
-       stx
-       (list #'this-package-in (attribute path))
-       stx)]))
+     (format-id (attribute suffix) #:source (attribute suffix)
+       "dracula/private/fasttest/~a" (attribute suffix))]))
 
 (provide cce fasttest)
