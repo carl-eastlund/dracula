@@ -1,9 +1,17 @@
 #lang racket
 
 (require
-  "../../collects.rkt"
-  (cce scheme))
+  (for-syntax
+    racket/base
+    syntax/parse
+    racket/syntax)
+  racket/require-syntax
+  "../../collects.rkt")
 
-(define-planet-package random schematics/random:1:0)
+(define-require-syntax (random stx)
+  (syntax-parse stx
+    [(_ suffix:id)
+     (format-id (attribute suffix) #:source (attribute suffix)
+       "schematics/random1/~a" (attribute suffix))]))
 
 (provide cce random)
