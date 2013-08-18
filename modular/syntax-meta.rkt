@@ -1,7 +1,7 @@
 #lang racket/base
 
 (require racket/contract
-         "../private/planet.rkt")
+         "../private/collects.rkt")
 (require (cce syntax))
 
 (define ((expand-keyword message) stx)

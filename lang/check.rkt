@@ -1,4 +1,4 @@
 #lang racket
 
-(require "../private/planet.rkt" (cce require-provide))
+(require "../private/collects.rkt" (cce require-provide))
 (require/provide "do-check.rkt")

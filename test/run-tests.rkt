@@ -1,6 +1,6 @@
 #lang racket
 
-(require "../private/planet.rkt"
+(require "../private/collects.rkt"
          "test-language.rkt"
          "test-library.rkt"
          "test-teachpacks.rkt" ;; LINKS, does not TEST

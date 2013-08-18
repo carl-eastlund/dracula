@@ -1,6 +1,6 @@
 #lang racket/base
 
-(require "../private/planet.rkt")
+(require "../private/collects.rkt")
 
 (require
 
@@ -9,7 +9,6 @@
     racket/list
     racket/match
     racket/block
-    planet/util
     syntax/parse
     syntax/boundmap
     racket/require-transform

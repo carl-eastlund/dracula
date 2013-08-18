@@ -1,7 +1,7 @@
 #lang racket
 
 (require
- "../private/planet.rkt"
+ "../private/collects.rkt"
  (lib "unit.rkt")
  (prefix-in audio: "../teachpacks/audio.rkt")
  (prefix-in avl-rational-keys: "../teachpacks/avl-rational-keys.rkt")

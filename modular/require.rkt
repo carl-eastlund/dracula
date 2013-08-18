@@ -1,6 +1,6 @@
 #lang racket/base
 
-(require "../private/planet.rkt")
+(require "../private/collects.rkt")
 (require (for-syntax racket/base (cce syntax)))
 
 (provide require-macro)

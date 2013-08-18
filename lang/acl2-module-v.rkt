@@ -1,6 +1,6 @@
 #lang racket
 
-(require syntax/moddep planet/util
+(require syntax/moddep
          (for-template racket/base))
 
 (provide acl2-module-v
@@ -9,22 +9,13 @@
          make-teachpack-require-syntax
          make-dracula-spec)
 
-(define dracula-package (this-package-version))
-(define dracula-package/no-version
-  (list (this-package-version-owner)
-        (this-package-version-name)))
-
 (define (make-dracula-spec #:version? [version? #t] file . dirs)
-  `(planet ,file
-           ,(if version?
-                dracula-package
-                dracula-package/no-version)
-           ,@dirs))
+  `(lib "dracula" ,@dirs ,file))
 
 (define (make-teachpack-require-syntax file)
-  (list #'planet file dracula-package "teachpacks"))
+  (list #'lib "dracula" "teachpacks" file))
 
-(define teachpack-v (list 'planet "teachpacks" dracula-package))
+(define teachpack-v (list 'lib "dracula" "teachpacks"))
 
 (define backslash-pattern #rx"\\\\")
 

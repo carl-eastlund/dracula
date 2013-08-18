@@ -5,8 +5,7 @@
     racket/base
     syntax/parse
     racket/syntax)
-  racket/require-syntax
-  planet/version)
+  racket/require-syntax)
 
 (define-require-syntax (cce stx)
   (syntax-parse stx

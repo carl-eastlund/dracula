@@ -1,7 +1,7 @@
 #lang racket/base
 
 (require racket/sandbox
-         "../private/planet.rkt"
+         "../private/collects.rkt"
          "../lang/acl2-module-v.rkt")
 
 (require (cce sandbox))

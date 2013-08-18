@@ -1,6 +1,6 @@
 #lang racket/base
 
-(require "../private/planet.rkt"
+(require "../private/collects.rkt"
          "../teachpacks/testing.rkt"
          "../teachpacks/doublecheck.rkt"
          "dynamic-rep.rkt"

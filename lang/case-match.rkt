@@ -3,7 +3,7 @@ ACL2's case-match, for destructuring s-expressions.
 |#
 #lang racket
 
-(require "../private/planet.rkt")
+(require "../private/collects.rkt")
 (require (for-syntax "syntax-checks.rkt"
                      (cce text)))
 

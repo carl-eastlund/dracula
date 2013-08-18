@@ -4,7 +4,7 @@ A few more forms are defined at provided toward the end.
 |#
 #lang racket
 
-(require "../private/planet.rkt")
+(require "../private/collects.rkt")
 (require (cce require-provide))
 
 (require/provide "constants.rkt"

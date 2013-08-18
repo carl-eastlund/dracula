@@ -7,7 +7,7 @@ Other library functions are implemented in (file "acl2-prims-scheme.rkt").
 #lang racket
 
 (require "../dracula-core.rkt"
-         "../../private/planet.rkt"
+         "../../private/collects.rkt"
          (prefix-in srfi: srfi/1)
          (prefix-in mz: racket)
          "acl2-prims-scheme.rkt")

@@ -1,6 +1,6 @@
 #lang racket
 
-(require "../private/planet.rkt")
+(require "../private/collects.rkt")
 (require (cce require-provide))
 
 (require/provide "dracula-core.rkt"

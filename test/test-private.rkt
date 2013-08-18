@@ -1,6 +1,6 @@
 #lang racket
 
-(require "../private/planet.rkt"
+(require "../private/collects.rkt"
          racket/sandbox)
 (require rackunit
          rackunit/gui
@@ -9,7 +9,7 @@
 (provide test-private)
 
 (define define-below-require
-  '(require (planet "lang/check.rkt" ("cce" "dracula.plt"))))
+  '(require (lib "dracula" "lang" "check.rkt")))
 
 (define (eval/module code)
   ((make-trusted-evaluator 'racket)

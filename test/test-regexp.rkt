@@ -1,6 +1,6 @@
 #lang racket
 
-(require "../private/planet.rkt"
+(require "../private/collects.rkt"
          "../private/regexp.rkt")
 (require rackunit)
 

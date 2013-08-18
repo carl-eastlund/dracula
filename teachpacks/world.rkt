@@ -4,7 +4,7 @@ Bug:  this teachpack provides procedures that
 |#
 #lang racket/base
 
-(require "../private/planet.rkt"
+(require "../private/collects.rkt"
          (prefix-in mz: (combine-in racket/base
                                     htdp/world
                                     lang/posn

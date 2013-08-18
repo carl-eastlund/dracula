@@ -3,7 +3,7 @@
 (require racket/stxparam
          "keywords.rkt"
          "dynamic-rep.rkt"
-         "../private/planet.rkt")
+         "../private/collects.rkt")
 
 (require (for-syntax racket/base
                      (cce syntax)

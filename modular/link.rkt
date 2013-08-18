@@ -1,7 +1,7 @@
 #lang racket/base
 
 (require
-  "../private/planet.rkt"
+  "../private/collects.rkt"
   (for-syntax
     racket/base
     racket/block

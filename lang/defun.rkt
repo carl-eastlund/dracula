@@ -6,7 +6,7 @@ operator position (or acl2-provide/contract).  Also does arity checking.
 
 (require "constants.rkt"
          "declare.rkt"
-         "../private/planet.rkt"
+         "../private/collects.rkt"
          "check.rkt"
          racket/stxparam)
 

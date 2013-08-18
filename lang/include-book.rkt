@@ -2,7 +2,7 @@
 
 (require (lib "include.rkt")
          "check.rkt"
-         "../private/planet.rkt")
+         "../private/collects.rkt")
 
 (require (for-syntax (lib "moddep.rkt" "syntax")
                      (prefix-in acl2- "acl2-reader.rkt")

@@ -1,6 +1,6 @@
 #lang racket/base
 
-(require "../private/planet.rkt"
+(require "../private/collects.rkt"
          "../proof/proof.rkt"
          "../proof/syntax.rkt"
          "../lang/acl2-module-v.rkt"

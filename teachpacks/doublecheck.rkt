@@ -1,6 +1,6 @@
 #lang racket
 
-(require "../private/planet.rkt"
+(require "../private/collects.rkt"
          "../lang/defun.rkt"
          "../lang/check.rkt"
          racket/gui/dynamic

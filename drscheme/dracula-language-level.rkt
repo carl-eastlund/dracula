@@ -4,7 +4,7 @@
          drscheme/tool-lib
          framework
          rackunit/gui
-         "../private/planet.rkt"
+         "../private/collects.rkt"
          (cce drscheme)
          "dracula-interfaces.rkt"
          "../lang/printer.rkt"

@@ -1,6 +1,6 @@
 #lang racket/base
 
-(require "../private/planet.rkt"
+(require "../private/collects.rkt"
          "../lang/check.rkt"
          "module.rkt")
 

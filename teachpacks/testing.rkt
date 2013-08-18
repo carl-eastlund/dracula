@@ -1,7 +1,7 @@
 #lang racket
 
 (require racket/gui/dynamic
-         "../private/planet.rkt"
+         "../private/collects.rkt"
          (cce scheme)
          (for-syntax (cce scheme))
          (prefix-in htdp: lang/private/teachprims)

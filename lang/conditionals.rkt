@@ -6,7 +6,7 @@ if and cond are currently in (file "acl2-prims-scheme.rkt").
 
 (require (file "constants.rkt")
          (file "nil-macros.rkt")
-         "../private/planet.rkt")
+         "../private/collects.rkt")
 (require (for-syntax (cce text)))
 
 (provide (rename-out [acl2-and and]

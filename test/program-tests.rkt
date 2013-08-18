@@ -2,7 +2,7 @@
 
 (require syntax/toplevel
          mred/mred
-         "../private/planet.rkt")
+         "../private/collects.rkt")
 (require rackunit
          (cce main))
 
