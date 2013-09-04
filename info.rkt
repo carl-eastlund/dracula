@@ -1,9 +1,14 @@
 #lang setup/infotab
 
-;; Required for all packages
-(define name "Dracula")
+;; Package:
+
+(define collection "dracula")
+(define deps '["planet-schematics-random1"])
 
 ;; setup-plt:
+
+(define name "Dracula")
+
 (define compile-omit-paths
   (list
     "acl2/gui.rkt"
@@ -16,22 +21,7 @@
 (define tool-names (list "Dracula"))
 (define tool-icons (list "images/acl2-icon.png"))
 
-;; planet:
-
-(define blurb '("Provides the Dracula language level for ACL2 emulation."))
-
-(define release-notes
-  '("8.22: Compatibility with Racket 5.2.0.4."))
-
-(define categories '(devtools scientific))
-
-(define homepage "http://www.ccs.neu.edu/home/cce/acl2/")
-
-(define primary-file "lang/dracula.rkt")
-
-(define required-core-version "4.2.5")
-
-(define repositories '("4.x"))
+;; documentation:
 
 (define scribblings
   '[("guide/guide.scrbl" [multi-page] [language -30])
