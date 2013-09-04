@@ -5,7 +5,7 @@
 
 @title[#:style 'quiet (scheme "world")]
 
-@(declare-exporting [dracula/teachpacks/world])
+@(declare-exporting dracula/teachpacks/world)
 
 @specform[(include-book "world" :dir :teachpacks)]
 

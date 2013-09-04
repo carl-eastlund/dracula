@@ -5,7 +5,7 @@
 
 @title[(scheme "avl-rational-keys")]
 
-@(declare-exporting [dracula/teachpacks/avl-rational-keys])
+@(declare-exporting dracula/teachpacks/avl-rational-keys)
 
 @specform[(include-book "avl-rational-keys" :dir :teachpacks)]
 

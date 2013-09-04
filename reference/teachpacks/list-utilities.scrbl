@@ -5,7 +5,7 @@
 
 @title[(scheme "list-utilities")]
 
-@(declare-exporting [dracula/teachpacks/list-utilities])
+@(declare-exporting dracula/teachpacks/list-utilities)
 
 @specform[(include-book "list-utilities" :dir :teachpacks)]
 

@@ -5,7 +5,7 @@
 
 @title[(scheme "audio")]
 
-@(declare-exporting [dracula/teachpacks/audio])
+@(declare-exporting dracula/teachpacks/audio)
 
 @specform[(include-book "audio" :dir :teachpacks)]
 

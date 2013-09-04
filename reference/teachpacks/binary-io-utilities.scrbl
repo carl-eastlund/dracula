@@ -5,6 +5,6 @@
 
 @title[(scheme "binary-io-utilities")]
 
-@(declare-exporting [dracula/teachpacks/binary-io-utilities])
+@(declare-exporting dracula/teachpacks/binary-io-utilities)
 
 Documentation under construction.

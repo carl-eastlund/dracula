@@ -5,7 +5,7 @@
 
 @title[(scheme "rand")]
 
-@(declare-exporting [dracula/teachpacks/rand])
+@(declare-exporting dracula/teachpacks/rand)
 
 @specform[(include-book "rand" :dir :teachpacks)]
 

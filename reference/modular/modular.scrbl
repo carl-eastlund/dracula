@@ -14,7 +14,8 @@ gentler introduction, see @secref["modular" #:doc (make-dracula-spec
 "guide/guide.scrbl")] in @other-manual[(make-dracula-spec
 "guide/guide.scrbl")].
 
-@(declare-exporting dracula/modular/main #:use-sources [lang/acl])
+@(defmodule dracula/modular
+  #:use-sources [dracula/modular/main dracula/lang/acl])
 
 @section{Interfaces}
 

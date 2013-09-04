@@ -8,7 +8,7 @@
 
 @title[#:style 'quiet #:tag "doublecheck" (scheme "doublecheck")]
 
-@(declare-exporting [dracula/teachpacks/doublecheck])
+@(declare-exporting dracula/teachpacks/doublecheck)
 
 @specform[(include-book "doublecheck" :dir :teachpacks)]
 

@@ -4,13 +4,14 @@
 
 @title{Dracula: Reference Manual}
 
-@(declare-exporting [dracula/lang/acl dracula/lang/dracula])
-
 This manual defines the ACL2 and Modular ACL2 languages provided by Dracula.
 For a gentler introduction to Dracula, see
 @other-manual[(make-dracula-spec "guide/guide.scrbl")].  For documentation on
 the ACL2 theorem prover itself, see
 @link["http://www.cs.utexas.edu/~moore/acl2/"]{the ACL2 home page}.
+
+@(defmodule dracula
+  #:use-sources [dracula/lang/acl dracula/lang/dracula])
 
 @local-table-of-contents[#:style 'immediate-only]
 
