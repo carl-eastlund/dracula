@@ -2,7 +2,7 @@
 
 (require mzlib/etc
          planet/util
-         syntax/srcloc
+         syntax/location
          "checks.ss"
          "../syntax.ss")
 
