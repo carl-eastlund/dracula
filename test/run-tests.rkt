@@ -26,4 +26,5 @@
      test-teachpacks
      test-library
      test-language
-     test-modular)))
+     test-modular))
+  #:wait? #true)

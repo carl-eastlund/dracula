@@ -9,7 +9,7 @@
 (provide test-private)
 
 (define define-below-require
-  '(require (lib "dracula" "lang" "check.rkt")))
+  '(require (lib "check.rkt" "dracula" "lang")))
 
 (define (eval/module code)
   ((make-trusted-evaluator 'racket)

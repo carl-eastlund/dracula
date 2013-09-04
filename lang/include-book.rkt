@@ -41,9 +41,7 @@
                (format "cannot include book ~s from inside itself" name)
                stx))
            (with-syntax ([teachpack-spec
-                          (datum->syntax
-                           stx
-                           (make-teachpack-require-syntax name))])
+                          (make-teachpack-require-syntax stx name)])
              (quasisyntax/loc stx
                (begin
                  (begin-for-syntax (hash-set! include-table '#,path #f))

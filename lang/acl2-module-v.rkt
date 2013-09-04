@@ -9,7 +9,8 @@
     [acl2-module-v module-path?]
     [modular-acl2-module-v module-path?]
     [teachpack-path path-string?]
-    [make-teachpack-require-syntax (-> path-string? module-path?)]
+    [make-teachpack-require-syntax
+     (-> syntax? path-string? module-path-syntax?)]
     [make-dracula-spec
      (->*
          {string?}
@@ -17,11 +18,15 @@
        #:rest (listof string?)
        module-path?)]))
 
+(define (module-path-syntax? x)
+  (and (syntax? x)
+    (module-path? (syntax->datum x))))
+
 (define (make-dracula-spec #:version? [version? #t] file . dirs)
   `(lib ,file "dracula" ,@dirs))
 
-(define (make-teachpack-require-syntax file)
-  (list #'lib file "dracula" "teachpacks"))
+(define (make-teachpack-require-syntax stx file)
+  (datum->syntax stx (list #'lib file "dracula" "teachpacks") stx))
 
 (define backslash-pattern #rx"\\\\")
 

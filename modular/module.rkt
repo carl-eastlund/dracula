@@ -94,8 +94,8 @@
     [(include-book file :dir :teachpacks)
      (string-literal? #'file)
      (let*-values ([(module-path)
-                    (datum->syntax stx (make-teachpack-require-syntax
-                                        (text->string #'file ".rkt")))]
+                    (make-teachpack-require-syntax stx
+                      (text->string #'file ".rkt"))]
                    [(imports sources) (expand-import module-path)]
                    [(names) (map import-local-id imports)])
        (with-syntax ([spec module-path]
