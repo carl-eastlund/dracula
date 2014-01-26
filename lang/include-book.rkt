@@ -5,6 +5,7 @@
   "check.rkt"
   "../private/collects.rkt"
   (for-syntax
+    racket/match
     syntax/moddep
     (prefix-in acl2- "acl2-reader.rkt")
     "acl2-module-v.rkt"
@@ -41,7 +42,7 @@
 
   (define-syntax-class keyword-symbol
     #:attributes {}
-    (pattern sym:symbol
+    (pattern sym:id
       #:when (regexp-match?
                #px"^:[^:]" ;; colon followed by non-colon at start of symbol
                (syntax-e #'sym))))
@@ -65,7 +66,7 @@
        [#:redundant #'(begin)]
        [{path filename}
         (define/syntax-parse spec
-          (make-teachpack-require-syntax stx filename))
+          (make-teachpack-require-syntax stx #'filename))
         #'(begin
             (begin-for-syntax (start-include 'path))
             (require-below spec)
