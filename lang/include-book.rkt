@@ -29,9 +29,10 @@
     (define filename (string-append prefix suffix))
     (define path
       (simple-form-path
-        (resolve-path-spec (datum->syntax #f filename))
-        prefix-stx
-        stx))
+        (resolve-path-spec
+          (datum->syntax #f filename)
+          prefix-stx
+          stx)))
     (match (hash-ref include-table path #false)
       [#false (list path filename)]
       ['finished '#:redundant]
@@ -45,7 +46,7 @@
     (pattern sym:id
       #:when (regexp-match?
                #px"^:[^:]" ;; colon followed by non-colon at start of symbol
-               (syntax-e #'sym))))
+               (symbol->string (syntax-e #'sym)))))
 
   (define-syntax-class custom-book-dir
     #:attributes {}
@@ -59,7 +60,15 @@
 
   (syntax-parse stx
     #:datum-literals
-      {:dir :system :teachpacks :uncertified-okp :ttags :load-compiled-file}
+      {:dir
+       :system
+       :teachpacks
+       :load-compiled-file
+       :uncertified-okp
+       :defaxioms-okp
+       :skip-proofs-okp
+       :ttags
+       :doc}
 
     [(_ name:str :dir :teachpacks)
      (syntax-parse (path-for-include stx #'name ".rkt")
@@ -87,9 +96,12 @@
             (~or
               (~seq :dir :system)
               (~seq :dir _:custom-book-dir)))
+          (~optional (~seq :load-compiled-file _))
           (~optional (~seq :uncertified-okp _))
+          (~optional (~seq :defaxioms-okp _))
+          (~optional (~seq :skip-proofs-okp _))
           (~optional (~seq :ttags _))
-          (~optional (~seq :load-compiled-file _)))
+          (~optional (~seq :doc _:str)))
         ...)
      #'(begin)]))
 
