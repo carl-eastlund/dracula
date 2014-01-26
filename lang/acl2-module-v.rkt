@@ -10,7 +10,10 @@
     [modular-acl2-module-v module-path?]
     [teachpack-path path-string?]
     [make-teachpack-require-syntax
-     (-> syntax? path-string? module-path-syntax?)]
+     (->
+       syntax?
+       (or/c path-string? (syntax/c path-string?))
+       module-path-syntax?)]
     [make-dracula-spec
      (->*
          {string?}

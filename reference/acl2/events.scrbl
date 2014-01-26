@@ -119,6 +119,13 @@ animations and other i/o, and are also reflected in the ACL2 logic.  See
 
 }
 
+@defform[(add-include-book-dir :symbol path)]{
+
+Adds a new @racket[:symbol] that @racket[include-book] will recognize after
+@racket[:dir], and treat exactly like @racket[:system].
+
+}
+
 @defform[(mutual-recursion def1 ... defn)]{
 For defining mutually-recursive functions.
 @examples[

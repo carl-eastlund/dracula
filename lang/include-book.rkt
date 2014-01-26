@@ -1,72 +1,99 @@
 #lang racket
 
-(require (lib "include.rkt")
-         "check.rkt"
-         "../private/collects.rkt")
+(require
+  racket/include
+  "check.rkt"
+  "../private/collects.rkt"
+  (for-syntax
+    syntax/moddep
+    (prefix-in acl2- "acl2-reader.rkt")
+    "acl2-module-v.rkt"
+    racket/path
+    racket/syntax
+    syntax/parse
+    syntax/path-spec))
 
-(require (for-syntax (lib "moddep.rkt" "syntax")
-                     (prefix-in acl2- "acl2-reader.rkt")
-                     "acl2-module-v.rkt"
-                     racket/path
-                     syntax/path-spec
-                     (cce text)))
+(provide include-book add-include-book-dir)
 
-(provide include-book)
+(begin-for-syntax
 
-(define-for-syntax include-table (make-hash))
+  (define include-table (make-hash))
+  (define book-dir-table (make-hash))
 
-(define-syntax include-book
-  (lambda (stx)
+  (define (start-include path) (hash-set! include-table path 'started))
+  (define (finish-include path) (hash-set! include-table path 'finished))
 
-    (when (eq? (syntax-local-context) 'expression)
-      (raise-syntax-error
-          #f "not valid as an expression" stx))
+  (define (path-for-include stx prefix-stx suffix)
+    (define prefix (syntax-e prefix-stx))
+    (define filename (string-append prefix suffix))
+    (define path
+      (simple-form-path
+        (resolve-path-spec (datum->syntax #f filename))
+        prefix-stx
+        stx))
+    (match (hash-ref include-table path #false)
+      [#false (list path filename)]
+      ['finished '#:redundant]
+      ['started
+       (wrong-syntax stx
+         "cannot include ~s from inside itself"
+         filename)]))
 
-    (syntax-case* stx (:dir :system :teachpacks) text=?
+  (define-syntax-class keyword-symbol
+    #:attributes {}
+    (pattern sym:symbol
+      #:when (regexp-match?
+               #px"^:[^:]" ;; colon followed by non-colon at start of symbol
+               (syntax-e #'sym))))
 
-      [(_ name-stx :dir :teachpacks)
+  (define-syntax-class custom-book-dir
+    #:attributes {}
+    (pattern key:keyword-symbol
+      #:when (hash-has-key? book-dir-table (syntax-e #'key)))))
 
-       (string? (syntax-e #'name-stx))
+(define-syntax (include-book stx)
 
-       (let* ([name (string-append (syntax-e #'name-stx) ".rkt")]
-              [path (simple-form-path
-                     (resolve-path-spec
-                      (datum->syntax #f name)
-                      #'name-stx
-                      stx))])
-         (if (hash-has-key? include-table path)
-           (if (hash-ref include-table path)
-             #'(begin)
-             (raise-syntax-error #f
-               (format "cannot include book ~s from inside itself" name)
-               stx))
-           (with-syntax ([teachpack-spec
-                          (make-teachpack-require-syntax stx name)])
-             (quasisyntax/loc stx
-               (begin
-                 (begin-for-syntax (hash-set! include-table '#,path #f))
-                 (require-below teachpack-spec)
-                 (begin-for-syntax (hash-set! include-table '#,path #t)))))))]
+  (when (eq? (syntax-local-context) 'expression)
+    (wrong-syntax stx "not valid as an expression"))
 
-      [(_ name-stx :dir :system)
-       (quasisyntax/loc stx (begin))]
+  (syntax-parse stx
+    #:datum-literals
+      {:dir :system :teachpacks :uncertified-okp :ttags :load-compiled-file}
 
-      [(_ name-stx)
-       (let* ([name (string-append (syntax-e #'name-stx) ".lisp")]
-              [path (simple-form-path
-                     (resolve-path-spec
-                      (datum->syntax #f name)
-                      #'name-stx
-                      stx))])
-         (if (hash-has-key? include-table path)
-           (if (hash-ref include-table path)
-             #'(begin)
-             (raise-syntax-error #f
-               (format "cannot include book ~s from inside itself" name)
-               stx))
-           (quasisyntax/loc stx
-             (begin
-               (begin-for-syntax (hash-set! include-table '#,path #f))
-               (include-at/relative-to/reader
-                name-stx name-stx #,name acl2-read-syntax)
-               (begin-for-syntax (hash-set! include-table '#,path #t))))))])))
+    [(_ name:str :dir :teachpacks)
+     (syntax-parse (path-for-include stx #'name ".rkt")
+       [#:redundant #'(begin)]
+       [{path filename}
+        (define/syntax-parse spec
+          (make-teachpack-require-syntax stx filename))
+        #'(begin
+            (begin-for-syntax (start-include 'path))
+            (require-below spec)
+            (begin-for-syntax (finish-include 'path)))])]
+
+    [(_ name:str)
+     (syntax-parse (path-for-include stx #'name ".lisp")
+       [#:redundant #'(begin)]
+       [{path filename}
+        #'(begin
+            (begin-for-syntax (start-include 'path))
+            (include-at/relative-to/reader name name filename acl2-read-syntax)
+            (begin-for-syntax (finish-include 'path)))])]
+
+    [(_ name:str
+        (~or
+          (~once
+            (~or
+              (~seq :dir :system)
+              (~seq :dir _:custom-book-dir)))
+          (~optional (~seq :uncertified-okp _))
+          (~optional (~seq :ttags _))
+          (~optional (~seq :load-compiled-file _)))
+        ...)
+     #'(begin)]))
+
+(define-syntax (add-include-book-dir stx)
+  (syntax-parse stx
+    [(_ key:keyword-symbol path:str)
+     #'(begin-for-syntax
+         (register-book-dir! 'key 'path))]))
