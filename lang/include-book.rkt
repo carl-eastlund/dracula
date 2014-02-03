@@ -51,7 +51,10 @@
   (define-syntax-class custom-book-dir
     #:attributes {}
     (pattern key:keyword-symbol
-      #:when (hash-has-key? book-dir-table (syntax-e #'key)))))
+      #:when (hash-has-key? book-dir-table (syntax-e #'key))))
+
+  (define (register-book-dir! key path)
+    (hash-set! book-dir-table key path)))
 
 (define-syntax (include-book stx)
 
