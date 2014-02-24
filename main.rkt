@@ -1,5 +1,6 @@
 #lang racket
-(require dracula/private/scheme/require-provide)
-(require/provide dracula/lang/dracula)
+(require "private/require.rkt")
+(require (dracula-in private/scheme/require-provide))
+(require/provide (dracula-in lang/dracula))
 (module+ reader
-  (require/provide dracula/lang/reader))
+  (require/provide (dracula-in lang/reader)))

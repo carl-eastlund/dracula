@@ -1,5 +1,5 @@
 #lang racket
 (module reader syntax/module-reader
-  dracula/modular)
-(require dracula/private/scheme/require-provide)
-(require/provide dracula/modular/main)
+  #:language (make-dracula-require-sexp 'modular))
+(require "private/scheme/require-provide.rkt")
+(require/provide (dracula-in modular/main))

@@ -4,19 +4,17 @@
   (for-syntax
     racket/base
     syntax/parse
-    racket/syntax)
+    (submod "require.rkt" syntax))
   racket/require-syntax)
 
 (define-require-syntax (cce stx)
   (syntax-parse stx
     [(_ suffix:id)
-     (format-id (attribute suffix) #:source (attribute suffix)
-       "dracula/private/scheme/~a" (attribute suffix))]))
+     (make-dracula-require-syntax #'suffix "private" "scheme")]))
 
 (define-require-syntax (fasttest stx)
   (syntax-parse stx
     [(_ suffix:id)
-     (format-id (attribute suffix) #:source (attribute suffix)
-       "dracula/private/fasttest/~a" (attribute suffix))]))
+     (make-dracula-require-syntax #'suffix "private" "fasttest")]))
 
 (provide cce fasttest)

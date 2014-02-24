@@ -73,3 +73,7 @@
          (syntax-e (attribute mod)))])))
 
 (module scribble racket/base)
+
+(require (submod "." macros))
+(require (dracula-in private/scheme/require-provide))
+(require/provide (submod "." spec) (submod "." macros))
