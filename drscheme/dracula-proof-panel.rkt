@@ -1,20 +1,23 @@
 #lang racket/gui
 
-(require drscheme/tool
-         framework
-         racket/runtime-path
-         mrlib/switchable-button
-         mrlib/bitmap-label
-         racket/pretty
-         "dracula-interfaces.rkt"
-         "executable-path.rkt"
-         "dracula-state.rkt"
-         "../proof/proof.rkt"
-         "../acl2/acl2.rkt"
-         "../lang/acl2-module-v.rkt")
+(require
+  drscheme/tool
+  framework
+  racket/runtime-path
+  mrlib/switchable-button
+  mrlib/bitmap-label
+  racket/pretty
+  racket/require
+  (path-up "self/module-path.rkt")
+  "dracula-interfaces.rkt"
+  "executable-path.rkt"
+  "dracula-state.rkt"
+  "../proof/proof.rkt"
+  "../acl2/acl2.rkt")
 
-(provide dracula-proof-panel^
-         dracula-proof-panel@)
+(provide
+  dracula-proof-panel^
+  dracula-proof-panel@)
 
 ;; Paths for the button images:
 (define-runtime-path save-img "../images/save.png")
@@ -46,7 +49,7 @@
   (define drscheme-eventspace (current-eventspace))
 
   (define SEXP-ADD-TEACHPACK-DIR
-    `(add-include-book-dir :teachpacks ,teachpack-path))
+    `(add-include-book-dir :teachpacks ,dracula-teachpack-dir))
 
   ;; ======================================================================
   ;;

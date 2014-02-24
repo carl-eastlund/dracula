@@ -1,18 +1,22 @@
 #lang racket/gui
 
-(require drscheme/tool
-         drscheme/tool-lib
-         framework
-         rackunit/gui
-         "../private/collects.rkt"
-         (cce drscheme)
-         "dracula-interfaces.rkt"
-         "../lang/printer.rkt"
-         "../lang/acl2-module-v.rkt"
-         (prefix-in acl2- "../lang/acl2-reader.rkt"))
+(require
+  drscheme/tool
+  drscheme/tool-lib
+  framework
+  rackunit/gui
+  racket/require
+  (path-up "self/require.rkt")
+  (path-up "self/module-path.rkt")
+  (cce-in drscheme)
+  (dracula-in lang/printer)
+  "dracula-interfaces.rkt"
+  (prefix-in acl2-
+    (dracula-in lang/acl2-reader)))
 
-(provide dracula-language-level^
-         dracula-language-level@)
+(provide
+  dracula-language-level^
+  dracula-language-level@)
 
 (define-signature dracula-language-level^
   (dracula-default-language-level-mixin
@@ -55,7 +59,7 @@
       (define/override (dracula-mode) mode)))
 
   (define modular-reader-module
-    (make-dracula-spec #:version? #f "reader.rkt" "modular" "lang"))
+    (dracula-module-path #:version? #f 'modular/lang/reader))
 
   (define modular-metadata-lines 1)
 
@@ -119,23 +123,24 @@
 
   (define (make-dracula-language-level)
     (dracula-language-level
-     "ACL2"
-     acl2-module-v
-     1000
-     "ACL2 simulation & theorem prover interface"
-     'acl2))
+      "ACL2"
+      module-path:acl2
+      1000
+      "ACL2 simulation & theorem prover interface"
+      'acl2))
 
   (define (make-dracula-modular-language-level)
     (dracula-language-level
-     "Modular ACL2"
-     modular-acl2-module-v
-     2000
-     "ACL2 + module system"
-     'modular-acl2
-     (language-level-metadata-mixin modular-reader-module
-                                    modular-metadata-lines
-                                    modular-metadata->settings
-                                    modular-settings->metadata)))
+      "Modular ACL2"
+      module-path:modular-acl2
+      2000
+      "ACL2 + module system"
+      'modular-acl2
+      (language-level-metadata-mixin
+        modular-reader-module
+        modular-metadata-lines
+        modular-metadata->settings
+        modular-settings->metadata)))
 
   (define dracula-mode-name "ACL2 mode")
 
