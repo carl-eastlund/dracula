@@ -17,9 +17,8 @@ Austin}.
 
 @subsubsub*section{Installing Dracula}
   
-Dracula is available as a
-@link["http://planet.plt-scheme.org/display.ss?package=dracula.plt&owner=cce"]{Planet
-package}.  It can be installed using the @schemefont{planet} command line
+Dracula is available as a @link["http://pkg.racket-lang.org/#[dracula]"]{Racket
+package}.  It can be installed using the @schemefont{raco} command line
 utility. On Windows, this utility is in the directory where Racket is
 installed; on Mac or Unix, it is in the @schemefont{bin} subdirectory. To
 install Dracula using this utility, execute:
@@ -34,8 +33,9 @@ To uninstall Dracula, run the following at the command line:
 
 @subsubsub*section{Upgrading Dracula}
 
-To upgrade, remove the old Dracula as shown here. Then follow the installation
-instructions above.
+To upgrade Dracula, run the following at the command line:
+
+@exec{raco pkg update dracula}
 
 @subsubsub*section{Running Dracula programs as scripts}
 
