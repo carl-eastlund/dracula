@@ -1,17 +1,18 @@
 #lang racket/base
 
-(require racket/sandbox
-         "../private/collects.rkt"
-         "../lang/acl2-module-v.rkt")
-
-(require (cce sandbox))
+(require
+  racket/sandbox
+  racket/require
+  (path-up "self/require.rkt")
+  (path-up "self/module-path.rkt")
+  (cce-in sandbox))
 
 (provide the-evaluator evaluator modular-evaluator)
 
 (define (evaluator . definitions)
-  (apply make-scribble-evaluator acl2-module-v definitions))
+  (apply make-scribble-evaluator module-path:acl2 definitions))
 
 (define (modular-evaluator . definitions)
-  (apply make-scribble-evaluator modular-acl2-module-v definitions))
+  (apply make-scribble-evaluator module-path:modular-acl2 definitions))
 
 (define the-evaluator (evaluator))

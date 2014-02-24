@@ -1,5 +1,5 @@
 #lang scribble/doc
-@(require scribble/manual "../lang/acl2-module-v.ss")
+@(require scribble/manual racket/require (path-up "self/module-path.rkt"))
 
 @title{Dracula: A Guide to ACL2 Theorem Proving in DrRacket}
 
@@ -11,7 +11,7 @@ DoubleCheck, the teachpack for using automated testing to check your
 conjectures.  Section 4 introduces Modular ACL2, an extension of ACL2 that
 supports systematic, piece-by-piece development and verification of ACL2 proofs.
 
-See @other-manual[(make-dracula-spec "reference/reference.scrbl")] for a full
+See @other-manual[(dracula-module-path "reference/reference.scrbl")] for a full
 description of Dracula's languages and libraries in detail, or
 @link["http://www.cs.utexas.edu/~moore/acl2/"]{the ACL2 home page} for more
 information on the ACL2 theorem prover.

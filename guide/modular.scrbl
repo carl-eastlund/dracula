@@ -1,9 +1,11 @@
 #lang scribble/doc
 @(require
    scribble/manual
-   "../private/require.rkt"
-   (dracula-in guide/display lang/acl2-module-v)
-@(require (for-label (dracula-in modular/main)))
+   racket/require
+   (path-up "self/require.rkt")
+   (path-up "self/module-path.rkt")
+   (dracula-in guide/display)
+   (for-label (dracula-in modular/main)))
 
 @title[#:tag "modular"]{Modular ACL2}
 
@@ -416,5 +418,5 @@ you must open @filepath{double.lisp} to verify @scheme[MDouble] and
 @section{Final Words}
 
 Good luck using Modular ACL2!  For more details, see @secref[#:doc
-(make-dracula-spec "reference/reference.scrbl") "modular"] in
-@other-manual[(make-dracula-spec "reference/reference.scrbl")].
+(dracula-module-syntax "reference/reference.scrbl") "modular"] in
+@other-manual[(dracula-module-syntax "reference/reference.scrbl")].

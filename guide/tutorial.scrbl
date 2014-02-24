@@ -2,8 +2,9 @@
 @(require
    scribble/manual
    scheme/runtime-path
-   "../private/require.rkt"
-   (dracula-in lang/acl2-module-v))
+   racket/require
+   (path-up "self/require.rkt")
+   (path-up "self/module-path.rkt"))
 @(require (for-label (dracula-in lang/dracula)))
 
 @(define-runtime-path ChosenLanguage "images/chosen-language.png")
@@ -175,7 +176,7 @@ you may do so by clicking @schemefont{Save ACL2 Output As...} from the @schemefo
 @subsubsub*section{Explore the Sample Code}
 
 Now that you have a handle on the basics of using ACL2 via DrScheme, see
-@other-manual[(make-dracula-spec "reference/reference.scrbl")] for a full
+@other-manual[(dracula-module-syntax "reference/reference.scrbl")] for a full
 description of the ACL2 language.  Also, see the
 @link["http://www.ccs.neu.edu/home/cce/acl2/examples.html"]{Sample Code} at the
 Dracula web page to explore more in-depth examples.

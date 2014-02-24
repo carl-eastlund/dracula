@@ -1,5 +1,9 @@
 #lang scribble/doc
-@(require scribble/manual scheme/runtime-path "../lang/acl2-module-v.ss")
+@(require
+   scribble/manual
+   scheme/runtime-path
+   racket/require
+   (path-up "self/module-path.rkt"))
 
 @(define-runtime-path doublecheck-fail "images/doublecheck-fail.png")
 @(define-runtime-path doublecheck-ok "images/doublecheck-ok.png")
@@ -38,5 +42,5 @@ output show success.
 @image[doublecheck-ok]
 
 For more detailed information, see @secref["doublecheck" #:doc
-(make-dracula-spec "reference/reference.scrbl")] in
-@other-manual[(make-dracula-spec "reference/reference.scrbl")].
+(dracula-module-syntax "reference/reference.scrbl")] in
+@other-manual[(dracula-module-syntax "reference/reference.scrbl")].
