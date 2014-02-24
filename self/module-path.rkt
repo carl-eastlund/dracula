@@ -33,8 +33,12 @@
        (if version? (format ":~a:~a" major minor) "")
        (make-symbol-suffix file dirs))]
     [#false
-     (format-id stx #:source stx "~a"
-       (make-symbol-suffix file (append package dirs)))]))
+     (match (list file (append package dirs))
+       [(list 'main (list collect))
+        (format-id stx #:source stx "~a" collect)]
+       [(list file all-dirs)
+        (format-id stx #:source stx "~a"
+          (make-symbol-suffix file all-dirs))])]))
 
 (define (package-compound-module planet package stx version? file dirs)
   (define datum
