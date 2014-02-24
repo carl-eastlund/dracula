@@ -7,11 +7,12 @@
   teachpack-in)
 
 (require
+  racket/require
+  racket/require-syntax
   (for-syntax
     racket/base
     syntax/parse
-    (path-up "self/module-path.rkt"))
-  racket/require-syntax)
+    (path-up "self/module-path.rkt")))
 
 (begin-for-syntax
 

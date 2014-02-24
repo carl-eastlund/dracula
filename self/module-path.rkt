@@ -16,6 +16,7 @@
   racket/match
   racket/string
   racket/syntax
+  racket/runtime-path
   planet/version)
 
 (define planet-version (this-package-version))
@@ -58,21 +59,25 @@
      (dracula-module-id stx version? (string->symbol prefix) dirs)]
     [(? string?) (dracula-compound-module stx version? file dirs)]))
 
+(define (module-syntax-maker base)
+  (lambda {#:stx [stx #false]
+           #:version? [version? #true]
+           file . dirs}
+    (apply dracula-module-syntax
+      #:stx stx
+      #:version? version?
+      file base dirs)))
+
+(define dracula-teachpack-syntax (module-syntax-maker "teachpacks"))
+(define dracula-fasttest-syntax (module-syntax-maker "private/fasttest"))
+(define dracula-cce-syntax (module-syntax-maker "private/scheme"))
+
 (define (dracula-module-path #:version? [version? #true] file . dirs)
   (syntax->datum
     (apply dracula-module-syntax #:version? version? file dirs)))
 
 (define module-path:acl2 (dracula-module-path 'main))
 (define module-path:modular-acl2 (dracula-module-path 'modular))
-
-(define (dracula-teachpack-syntax
-          #:stx [stx #false]
-          #:version? [version? #true]
-          file . dirs)
-  (apply dracula-module-syntax
-    #:stx stx
-    #:version? version?
-    file "teachpacks" dirs))
 
 (define-runtime-path teachpack-path "../teachpacks")
 
