@@ -19,19 +19,23 @@
   racket/string
   racket/syntax
   racket/runtime-path
-  planet/version)
+  planet/version
+  (for-template
+    racket/base))
 
 (define (make-symbol-suffix file dirs)
   (string-join (append dirs (list (format "~a" file))) "/"))
 
-(define (package-module-id planet package stx version? file dirs)
-  (match planet
+(define (package-module-id planet* package stx version? file dirs)
+  (match planet*
     [(list owner (regexp #px"^(.*)[.]plt$" (list _ pkg)) major minor)
-     (format-id stx #:source stx "~a/~a~a/~a"
-       owner
-       pkg
-       (if version? (format ":~a:~a" major minor) "")
-       (make-symbol-suffix file dirs))]
+     (define id
+       (format-id stx #:source stx "~a/~a~a/~a"
+         owner
+         pkg
+         (if version? (format ":~a:~a" major minor) "")
+         (make-symbol-suffix file dirs)))
+     (datum->syntax stx (list #'planet id) stx)]
     [#false
      (match (list file (append package dirs))
        [(list 'main (list collect))
@@ -40,9 +44,9 @@
         (format-id stx #:source stx "~a"
           (make-symbol-suffix file all-dirs))])]))
 
-(define (package-compound-module planet package stx version? file dirs)
+(define (package-compound-module planet* package stx version? file dirs)
   (define datum
-    (match planet
+    (match planet*
       [(list owner package major minor)
        `(,#'planet ,file
           ,(if version?

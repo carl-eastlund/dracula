@@ -2,7 +2,8 @@
 
 (provide
   defmodule/dracula
-  declare-exporting/dracula)
+  declare-exporting/dracula
+  racketmod/dracula)
 
 (require
   racket/require
@@ -40,3 +41,8 @@
   (syntax-parse stx
     [(_ mod:dracula-mod ... use-sources:use-dracula-sources)
      #'(declare-exporting mod.module-path ... use-sources.splice ...)]))
+
+(define-syntax (racketmod/dracula stx)
+  (syntax-parse stx
+    [(_ mod:dracula-mod)
+     #'(racketmod mod.module-path)]))

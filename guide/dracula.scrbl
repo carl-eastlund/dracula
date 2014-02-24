@@ -1,5 +1,8 @@
 #lang scribble/doc
-@(require scribble/manual)
+@(require
+   scribble/manual
+   racket/require
+   (path-up "self/scribble.rkt"))
 
 @title[#:tag "install"]{Getting Started}
 
@@ -39,10 +42,10 @@ To upgrade Dracula, run the following at the command line:
 
 @subsubsub*section{Running Dracula programs as scripts}
 
-To run a Dracula program, e.g. "@filepath{program.lisp}". from the command line,
+To run a Dracula program, e.g. "@filepath{program.lisp}" from the command line,
 add the following line to the top of the main file:
 
-@schememod[dracula]
+@racketmod/dracula[main]
 
 Then run:
 
