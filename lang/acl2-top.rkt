@@ -1,7 +1,8 @@
 #lang racket
 
-(require "check.rkt"
-         (for-syntax "syntax-checks.rkt"))
+(require
+  "do-check.rkt"
+  (for-syntax "syntax-checks.rkt"))
 
 (provide (rename-out [acl2-top #%top]))
 

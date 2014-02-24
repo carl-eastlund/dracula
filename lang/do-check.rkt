@@ -1,13 +1,16 @@
 #lang racket
 
-(require "../private/collects.rkt"
-         racket/stxparam
-         (cce define)
-         (for-syntax syntax/parse
-                     racket/match
-                     racket/unit-exptime
-                     racket/require-transform
-                     (cce syntax)))
+(require
+  racket/require
+  (path-up "self/require.rkt")
+  racket/stxparam
+  (cce-in define)
+  (for-syntax
+    syntax/parse
+    racket/match
+    racket/unit-exptime
+    racket/require-transform
+    (cce-in syntax)))
 
 (define-syntax-parameter check-arity? #t)
 

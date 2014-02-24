@@ -3,9 +3,12 @@ ACL2's case-match, for destructuring s-expressions.
 |#
 #lang racket
 
-(require "../private/collects.rkt")
-(require (for-syntax "syntax-checks.rkt"
-                     (cce text)))
+(require
+  racket/require
+  (path-up "self/require.rkt")
+  (for-syntax
+    "syntax-checks.rkt"
+    (cce-in text)))
 
 (provide case-match)
 

@@ -6,17 +6,19 @@ Other library functions are implemented in (file "acl2-prims-scheme.rkt").
 |#
 #lang racket
 
-(require "../dracula-core.rkt"
-         "../../private/collects.rkt"
-         (prefix-in srfi: srfi/1)
-         (prefix-in mz: racket)
-         "acl2-prims-scheme.rkt")
+(require
+  "../dracula-core.rkt"
+  (prefix-in srfi: srfi/1)
+  (prefix-in mz: racket)
+  "acl2-prims-scheme.rkt"
+  racket/require
+  (path-up "self/require.rkt")
+  (for-syntax (cce-in text)))
 
-(require (for-syntax (cce text)))
-
-(provide (except-out (all-from-out "acl2-prims-scheme.rkt")
-                     define/c
-                     not-nil))
+(provide
+  (except-out (all-from-out "acl2-prims-scheme.rkt")
+    define/c
+    not-nil))
 
 (define (false->nil x) (mz:if x x nil))
 

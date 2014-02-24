@@ -4,7 +4,8 @@
   cce-in
   fasttest-in
   dracula-in
-  teachpack-in)
+  teachpack-in
+  random-in)
 
 (require
   racket/require
@@ -37,3 +38,6 @@
 
 (define-require-syntax teachpack-in
   (make-module-requirer dracula-teachpack-syntax))
+
+(define-require-syntax random-in
+  (make-module-requirer dracula-random-syntax))

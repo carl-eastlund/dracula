@@ -1,18 +1,21 @@
 #lang racket
 
-(require "../private/collects.rkt"
-         "../lang/defun.rkt"
-         "../lang/check.rkt"
-         racket/gui/dynamic
-         racket/stxparam
-         (cce function)
-         (prefix-in r: (fasttest random))
-         (fasttest rackunit)
-         rackunit
-         (for-syntax syntax/stx
-                     racket/stxparam-exptime
-                     (cce syntax)
-                     (cce text)))
+(require
+  racket/require
+  (path-up "self/require.rkt")
+  "../lang/defun.rkt"
+  "../lang/do-check.rkt"
+  racket/gui/dynamic
+  racket/stxparam
+  (cce-in function)
+  (prefix-in r: (fasttest-in random))
+  (fasttest-in rackunit)
+  rackunit
+  (for-syntax
+    syntax/stx
+    racket/stxparam-exptime
+    (cce-in syntax)
+    (cce-in text)))
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

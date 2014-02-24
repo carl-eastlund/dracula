@@ -4,13 +4,14 @@ Many library primitives are implemented in Scheme here for efficiency.
 |#
 #lang racket
 
-(require (prefix-in srfi: srfi/1)
-         "../constants.rkt"
-         "../nil-macros.rkt"
-         "../equality.rkt"
-         "../defun.rkt"
-         "../check.rkt"
-         (for-syntax syntax/parse))
+(require
+  (prefix-in srfi: srfi/1)
+  "../constants.rkt"
+  "../nil-macros.rkt"
+  "../equality.rkt"
+  "../defun.rkt"
+  "../do-check.rkt"
+  (for-syntax syntax/parse))
 
 (provide define/c)
 

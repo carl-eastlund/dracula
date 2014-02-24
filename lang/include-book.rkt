@@ -1,14 +1,15 @@
 #lang racket
 
 (require
+  "do-check.rkt"
   racket/include
-  "check.rkt"
-  "../private/collects.rkt"
+  racket/require
+  (path-up "self/require.rkt")
   (for-syntax
     racket/match
     syntax/moddep
     (prefix-in acl2- "acl2-reader.rkt")
-    "acl2-module-v.rkt"
+    (path-up "self/module-path.rkt")
     racket/path
     racket/syntax
     syntax/parse
@@ -78,7 +79,7 @@
        [#:redundant #'(begin)]
        [{path filename}
         (define/syntax-parse spec
-          (make-teachpack-require-syntax stx #'filename))
+          (dracula-teachpack-syntax #:stx stx (syntax-e #'filename)))
         #'(begin
             (begin-for-syntax (start-include 'path))
             (require-below spec)

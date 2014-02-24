@@ -4,16 +4,18 @@ operator position (or acl2-provide/contract).  Also does arity checking.
 |#
 #lang racket
 
-(require "constants.rkt"
-         "declare.rkt"
-         "../private/collects.rkt"
-         "check.rkt"
-         racket/stxparam)
-
-(require (for-syntax "t-or-nil.rkt"
-                     racket/match
-                     (cce function)
-                     (cce syntax)))
+(require
+  "constants.rkt"
+  "declare.rkt"
+  "do-check.rkt"
+  racket/stxparam
+  racket/require
+  (path-up "self/require.rkt")
+  (for-syntax
+    "t-or-nil.rkt"
+    racket/match
+    (cce-in function)
+    (cce-in syntax)))
 
 (provide defun
          defund

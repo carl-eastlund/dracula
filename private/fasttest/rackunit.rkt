@@ -1,9 +1,12 @@
 #lang racket
 
-(require "private/utils.ss"
-         "private/random-stream.ss")
-(require rackunit
-         (for-syntax (cce text)))
+(require
+  rackunit
+  racket/require
+  (path-up "self/require.rkt")
+  "private/random-stream.rkt"
+  (for-syntax
+    (cce-in text)))
 
 (provide test-random)
 

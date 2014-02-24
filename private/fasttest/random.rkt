@@ -1,9 +1,14 @@
 #lang racket
 
-(require "private/utils.ss")
-(require (for-syntax (cce syntax))
-         (cce function)
-         (prefix-in raw- (combine-in (random random) srfi/27)))
+(require
+  racket/require
+  (path-up "self/require.rkt")
+  (for-syntax (cce-in syntax))
+  (cce-in function)
+  (prefix-in raw-
+    (combine-in
+      (random-in random)
+      srfi/27)))
 
 (provide/contract
  [prob/c (case->

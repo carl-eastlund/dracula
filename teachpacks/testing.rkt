@@ -1,13 +1,16 @@
 #lang racket
 
-(require racket/gui/dynamic
-         "../private/collects.rkt"
-         (cce scheme)
-         (for-syntax (cce scheme))
-         (prefix-in htdp: lang/private/teachprims)
-         (prefix-in engine:
-                    (combine-in (lib "racket-tests.rkt" "test-engine")
-                                (lib "test-info.scm" "test-engine"))))
+(require
+  racket/gui/dynamic
+  racket/require
+  (path-up "self/require.rkt")
+  (cce-in scheme)
+  (for-syntax (cce-in scheme))
+  (prefix-in htdp: lang/private/teachprims)
+  (prefix-in engine:
+    (combine-in
+      (lib "racket-tests.rkt" "test-engine")
+      (lib "test-info.scm"    "test-engine"))))
 
 (provide check-expect check-within check-error generate-report generate-report!)
 

@@ -1,8 +1,10 @@
 #lang racket
 
-(require "utils.ss")
-(require (cce queue)
-         (cce function))
+(require
+  racket/require
+  (path-up "self/require.rkt")
+  (cce-in queue)
+  (cce-in function))
 
 ;; A (RandomStreamof T) is (make-random-stream promise)
 ;; where promise : (RandomStreamPromiseof T)

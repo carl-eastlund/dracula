@@ -1,9 +1,12 @@
 #lang racket
 
-(require "check.rkt"
-         "../teachpacks/testing.rkt"
-         "../teachpacks/doublecheck.rkt"
-         (for-syntax "../proof/proof.rkt" "../proof/syntax.rkt"))
+(require
+  "do-check.rkt"
+  "../teachpacks/testing.rkt"
+  "../teachpacks/doublecheck.rkt"
+  (for-syntax
+    "../proof/proof.rkt"
+    "../proof/syntax.rkt"))
 
 (provide dracula-module-begin)
 

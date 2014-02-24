@@ -4,10 +4,12 @@ if and cond are currently in (file "acl2-prims-scheme.rkt").
 |#
 #lang racket
 
-(require (file "constants.rkt")
-         (file "nil-macros.rkt")
-         "../private/collects.rkt")
-(require (for-syntax (cce text)))
+(require
+  racket/require
+  (path-up "self/require.rkt")
+  "constants.rkt"
+  "nil-macros.rkt"
+  (for-syntax (cce-in text)))
 
 (provide (rename-out [acl2-and and]
                      [acl2-or or]

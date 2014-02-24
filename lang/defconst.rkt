@@ -3,7 +3,7 @@
 (provide defconst)
 
 (require (for-syntax "syntax-checks.rkt")
-         "check.rkt"
+         "do-check.rkt"
          "acl2-app.rkt")
 
 (define-syntax (defconst stx)

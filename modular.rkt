@@ -8,7 +8,7 @@
     racket/require
     (path-up "self/require.rkt")
     (path-up "self/module-path.rkt")
-    (dracula-in lang/reader)))
+    (dracula-in lang/acl2-reader)))
 
 (require
   racket/require

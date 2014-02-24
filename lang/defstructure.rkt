@@ -1,8 +1,11 @@
 #lang racket
 
-(require "../private/collects.rkt"
-         "defun.rkt")
-(require (for-syntax (cce text)))
+(require
+  racket/require
+  (path-up "self/require.rkt")
+  "defun.rkt"
+  (for-syntax
+    (cce-in text)))
 
 (provide defstructure)
 
