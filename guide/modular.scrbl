@@ -418,5 +418,5 @@ you must open @filepath{double.lisp} to verify @scheme[MDouble] and
 @section{Final Words}
 
 Good luck using Modular ACL2!  For more details, see @secref[#:doc
-(dracula-module-syntax "reference/reference.scrbl") "modular"] in
-@other-manual[(dracula-module-syntax "reference/reference.scrbl")].
+(dracula-module-path "reference/reference.scrbl") "modular"] in
+@other-manual[(dracula-module-path "reference/reference.scrbl")].

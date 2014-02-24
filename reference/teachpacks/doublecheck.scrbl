@@ -1,22 +1,25 @@
 #lang scribble/doc
-@(require scribble/manual
-          scribble/eval
-          "../evaluator.ss"
-          "../../lang/acl2-module-v.ss")
+@(require
+   scribble/manual
+   scribble/eval
+   racket/require
+   (path-up "self/module-path.rkt")
+   (path-up "self/scribble.rkt")
+   "../evaluator.ss")
 @(require (for-label dracula/lang/dracula
                      dracula/teachpacks/doublecheck))
 
 @title[#:style 'quiet #:tag "doublecheck" (scheme "doublecheck")]
 
-@(declare-exporting dracula/teachpacks/doublecheck)
+@(declare-exporting/dracula teachpacks/doublecheck)
 
 @specform[(include-book "doublecheck" :dir :teachpacks)]
 
 This teachpack defines automated random test generation as a complement to
 theorem proving.  Each property declared via DoubleCheck is tested randomly by
 Dracula, and verified logically by ACL2.  For a gentle introduction, see
-@secref[#:doc (make-dracula-spec "guide/guide.scrbl") "doublecheck"] in
-@other-manual[(make-dracula-spec "guide/guide.scrbl")].
+@secref[#:doc (dracula-module-path "guide/guide.scrbl") "doublecheck"] in
+@other-manual[(dracula-module-path "guide/guide.scrbl")].
 
 @section{Properties}
 

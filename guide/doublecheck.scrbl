@@ -42,5 +42,5 @@ output show success.
 @image[doublecheck-ok]
 
 For more detailed information, see @secref["doublecheck" #:doc
-(dracula-module-syntax "reference/reference.scrbl")] in
-@other-manual[(dracula-module-syntax "reference/reference.scrbl")].
+(dracula-module-path "reference/reference.scrbl")] in
+@other-manual[(dracula-module-path "reference/reference.scrbl")].

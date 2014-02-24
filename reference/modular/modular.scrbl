@@ -1,21 +1,25 @@
 #lang scribble/doc
-@(require scribble/manual
-          scribble/eval
-          "../evaluator.ss"
-          "../../guide/display.ss"
-          "../../lang/acl2-module-v.ss")
-@(require (for-syntax scheme/base)
-          (for-label dracula/modular/main))
+@(require
+   scribble/manual
+   scribble/eval
+   racket/require
+   (path-up "self/require.rkt")
+   (path-up "self/scribble.rkt")
+   (path-up "self/module-path.rkt")
+   "../evaluator.ss"
+   "../../guide/display.rkt"
+   (for-syntax scheme/base)
+   (for-label (dracula-in modular/main)))
 
 @title[#:tag "modular"]{Modular ACL2}
 
 This section defines the Modular ACL2 language provided by Dracula.  For a
-gentler introduction, see @secref["modular" #:doc (make-dracula-spec
-"guide/guide.scrbl")] in @other-manual[(make-dracula-spec
-"guide/guide.scrbl")].
+gentler introduction, see @secref["modular" #:doc
+(dracula-module-path "guide/guide.scrbl")] in
+@other-manual[(dracula-module-path "guide/guide.scrbl")].
 
-@(defmodule dracula/modular
-  #:use-sources [dracula/modular/main dracula/lang/acl])
+@(defmodule/dracula modular
+  #:use-sources [modular/main lang/acl])
 
 @section{Interfaces}
 

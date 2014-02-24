@@ -1,7 +1,7 @@
 #lang racket/base
 
 (require "../lang/dracula.rkt"
-         "../lang/check.rkt"
+         "../lang/do-check.rkt"
          "list-utilities.rkt")
 
 (provide (all-defined-out))

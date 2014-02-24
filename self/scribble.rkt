@@ -1,6 +1,12 @@
 #lang racket/base
 
+(provide
+  defmodule/dracula
+  declare-exporting/dracula)
+
 (require
+  racket/require
+  scribble/manual
   (for-syntax
     racket/base
     syntax/parse
@@ -12,7 +18,7 @@
     #:attributes {module-path}
     (pattern mod:id
       #:attr module-path
-      (dracula-module-path #:stx (attribute mod)
+      (dracula-module-syntax #:stx (attribute mod)
         (syntax-e (attribute mod)))))
 
   (define-splicing-syntax-class use-dracula-sources
@@ -29,3 +35,8 @@
   (syntax-parse stx
     [(_ mod:dracula-mod use-sources:use-dracula-sources)
      #'(defmodule mod.module-path use-sources.splice ...)]))
+
+(define-syntax (declare-exporting/dracula stx)
+  (syntax-parse stx
+    [(_ mod:dracula-mod ... use-sources:use-dracula-sources)
+     #'(declare-exporting mod.module-path ... use-sources.splice ...)]))

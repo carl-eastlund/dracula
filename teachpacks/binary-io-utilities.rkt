@@ -1,6 +1,6 @@
 #lang racket
 
-(require "../lang/dracula.rkt" "../lang/check.rkt")
+(require "../lang/dracula.rkt" "../lang/do-check.rkt")
 
 (provide (all-defined-out))
 

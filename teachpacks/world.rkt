@@ -4,15 +4,19 @@ Bug:  this teachpack provides procedures that
 |#
 #lang racket/base
 
-(require "../private/collects.rkt"
-         (prefix-in mz: (combine-in racket/base
-                                    htdp/world
-                                    lang/posn
-                                    (cce define)
-                                    (cce function)))
-         "../lang/dracula.rkt"
-         "../lang/check.rkt"
-         (for-syntax racket/base))
+(require
+  racket/require
+  (path-up "self/require.rkt")
+  (prefix-in mz:
+    (combine-in
+      racket/base
+      htdp/world
+      lang/posn
+      (cce-in define)
+      (cce-in function)))
+  "../lang/dracula.rkt"
+  "../lang/do-check.rkt"
+  (for-syntax racket/base))
 
 (mz:define-if-unbound mz:image?
   (mz:block

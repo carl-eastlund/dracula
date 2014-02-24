@@ -2,7 +2,7 @@
 
 (require (prefix-in mz: racket/base)
          "../lang/dracula.rkt"
-         "../lang/check.rkt")
+         "../lang/do-check.rkt")
 
 (provide (all-defined-out))
 
