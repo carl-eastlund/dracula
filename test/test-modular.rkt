@@ -1,11 +1,12 @@
 #lang racket/base
 
-(require "../private/collects.rkt"
-         "../proof/proof.rkt"
-         "../proof/syntax.rkt"
-         "../lang/acl2-module-v.rkt"
-         "program-tests.rkt")
-(require rackunit)
+(require
+  rackunit
+  racket/require
+  (path-up "self/module-path.rkt")
+  "../proof/proof.rkt"
+  "../proof/syntax.rkt"
+  "program-tests.rkt")
 
 (provide test-modular)
 
@@ -18,7 +19,7 @@
     (term-sexp (part-nth part i))))
 
 (define (program defns [repl null])
-  (make-module-program/mred modular-acl2-module-v defns repl))
+  (make-module-program/mred module-path:modular-acl2 defns repl))
 
 (define (test/modular name defns repl result proof)
   (let* ([prog (program defns repl)])

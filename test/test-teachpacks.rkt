@@ -1,17 +1,15 @@
 #lang racket
 
 (require
- "../private/collects.rkt"
- (lib "unit.rkt")
- (prefix-in audio: "../teachpacks/audio.rkt")
- (prefix-in avl-rational-keys: "../teachpacks/avl-rational-keys.rkt")
- (prefix-in binary-io: "../teachpacks/binary-io-utilities.rkt")
- (prefix-in io: "../teachpacks/io-utilities.rkt")
- (prefix-in list: "../teachpacks/list-utilities.rkt")
- (prefix-in testing: "../teachpacks/testing.rkt")
- (prefix-in world: "../teachpacks/world.rkt")
- (prefix-in doublecheck: "../teachpacks/doublecheck.rkt"))
-(require rackunit)
+  rackunit
+  (prefix-in audio: "../teachpacks/audio.rkt")
+  (prefix-in avl-rational-keys: "../teachpacks/avl-rational-keys.rkt")
+  (prefix-in binary-io: "../teachpacks/binary-io-utilities.rkt")
+  (prefix-in io: "../teachpacks/io-utilities.rkt")
+  (prefix-in list: "../teachpacks/list-utilities.rkt")
+  (prefix-in testing: "../teachpacks/testing.rkt")
+  (prefix-in world: "../teachpacks/world.rkt")
+  (prefix-in doublecheck: "../teachpacks/doublecheck.rkt"))
 
 (provide test-teachpacks)
 

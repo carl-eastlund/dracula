@@ -1,19 +1,21 @@
 #lang racket
 
-(require "../private/collects.rkt"
-         "../proof/proof.rkt"
-         "../proof/syntax.rkt"
-         "../lang/acl2-module-v.rkt"
-         "program-tests.rkt")
-(require rackunit
-         (cce main))
+(require
+  rackunit
+  racket/require
+  (path-up "self/require.rkt")
+  (path-up "self/module-path.rkt")
+  "../proof/proof.rkt"
+  "../proof/syntax.rkt"
+  "program-tests.rkt"
+  (cce-in main))
 
 (provide test-language)
 
 (define loc (make-loc #f #f #f))
 
 (define program
-  (papply make-module-program/mred acl2-module-v))
+  (papply make-module-program/mred module-path:acl2))
 
 (define (proof . args)
   (make-proof (make-part 'Dracula loc (map sexp->term args))))

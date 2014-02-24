@@ -1,10 +1,12 @@
 #lang racket
 
-(require syntax/toplevel
-         mred/mred
-         "../private/collects.rkt")
-(require rackunit
-         (cce main))
+(require
+  syntax/toplevel
+  mred/mred
+  rackunit
+  racket/require
+  (path-up "self/require.rkt")
+  (cce-in main))
 
 (define (top-level->module lang-path terms)
   (let* ([name (gensym 'program)])

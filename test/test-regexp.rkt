@@ -1,8 +1,8 @@
 #lang racket
 
-(require "../private/collects.rkt"
-         "../private/regexp.rkt")
-(require rackunit)
+(require
+  rackunit
+  "../private/regexp.rkt")
 
 (define-syntax (test-regexp stx)
   (syntax-case stx ()

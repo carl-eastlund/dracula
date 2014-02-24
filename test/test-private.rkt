@@ -1,10 +1,12 @@
 #lang racket
 
-(require "../private/collects.rkt"
-         racket/sandbox)
-(require rackunit
-         rackunit/gui
-         (cce main))
+(require
+  rackunit
+  rackunit/gui
+  racket/sandbox
+  racket/require
+  (path-up "self/require.rkt")
+  (cce-in main))
 
 (provide test-private)
 

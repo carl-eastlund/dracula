@@ -1,9 +1,9 @@
 #lang racket
 
-(require "../private/collects.rkt"
-         "../proof/proof.rkt"
-         "data-proof.rkt")
-(require rackunit)
+(require
+  rackunit
+  "../proof/proof.rkt"
+  "data-proof.rkt")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

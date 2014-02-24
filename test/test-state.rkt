@@ -1,9 +1,9 @@
 #lang racket
 
-(require "../private/collects.rkt"
-         "../drscheme/dracula-state.rkt"
-         "data-state.rkt")
-(require rackunit)
+(require
+  rackunit
+  "../drscheme/dracula-state.rkt"
+  "data-state.rkt")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

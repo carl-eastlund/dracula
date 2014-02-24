@@ -1,15 +1,17 @@
 #lang racket
 
-(require "../private/collects.rkt"
-         "../lang/acl2-module-v.rkt"
-         racket/sandbox)
-(require rackunit)
-(require (cce sandbox))
+(require
+  rackunit
+  racket/sandbox
+  racket/require
+  (path-up "self/require.rkt")
+  (path-up "self/module-path.rkt")
+  (cce-in sandbox))
 
 (provide test-library)
 
 (define dracula
-  (make-trusted-evaluator acl2-module-v))
+  (make-trusted-evaluator module-path:acl2))
 
 (define-syntax (test-dracula stx)
   (syntax-case stx ()

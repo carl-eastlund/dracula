@@ -1,17 +1,17 @@
 #lang racket
 
-(require "../private/collects.rkt"
-         "test-language.rkt"
-         "test-library.rkt"
-         "test-teachpacks.rkt" ;; LINKS, does not TEST
-         "test-modular.rkt"
-         "test-parse.rkt"
-         "test-proof.rkt"
-         "test-regexp.rkt"
-         "test-state.rkt"
-         "test-private.rkt")
-(require rackunit
-         rackunit/gui)
+(require
+  rackunit
+  rackunit/gui
+  "test-language.rkt"
+  "test-library.rkt"
+  "test-teachpacks.rkt" ;; LINKS, does not TEST
+  "test-modular.rkt"
+  "test-parse.rkt"
+  "test-proof.rkt"
+  "test-regexp.rkt"
+  "test-state.rkt"
+  "test-private.rkt")
 
 (test/gui
  (test-suite "Dracula"

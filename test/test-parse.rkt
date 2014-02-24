@@ -1,9 +1,9 @@
 #lang racket
 
-(require "../private/collects.rkt"
-         "../acl2/parse.rkt"
-         "data-parse.rkt")
-(require rackunit)
+(require
+  rackunit
+  "../acl2/parse.rkt"
+  "data-parse.rkt")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
