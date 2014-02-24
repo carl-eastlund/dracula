@@ -1,7 +1,11 @@
 #lang racket/base
 
-(require "../private/collects.rkt")
-(require (for-syntax racket/base (cce syntax)))
+(require
+  racket/require
+  (path-up "self/require.rkt")
+  (for-syntax
+    racket/base
+    (cce-in syntax)))
 
 (provide require-macro)
 

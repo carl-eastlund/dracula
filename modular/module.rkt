@@ -1,8 +1,16 @@
 #lang racket/base
 
-(require "../private/collects.rkt")
-
 (require
+
+  mzlib/etc
+  racket/require
+  (path-up "self/require.rkt")
+  (cce-in require-provide)
+  "keywords.rkt"
+  "dynamic-rep.rkt"
+  "../lang/defun.rkt"
+  "../lang/do-check.rkt"
+  "../lang/theorems.rkt"
 
   (for-syntax
     racket/base
@@ -12,22 +20,14 @@
     syntax/parse
     syntax/boundmap
     racket/require-transform
-    (cce syntax)
-    (cce values)
-    (cce text)
+    (cce-in syntax)
+    (cce-in values)
+    (cce-in text)
+    (path-up "self/module-path.rkt")
     "static-rep.rkt"
     "syntax-meta.rkt"
-    "../lang/acl2-module-v.rkt"
     "../proof/proof.rkt"
-    "../proof/syntax.rkt")
-
-  mzlib/etc
-  (cce require-provide)
-  "keywords.rkt"
-  "dynamic-rep.rkt"
-  "../lang/defun.rkt"
-  "../lang/check.rkt"
-  "../lang/theorems.rkt")
+    "../proof/syntax.rkt"))
 
 (provide module-macro)
 
@@ -94,8 +94,8 @@
     [(include-book file :dir :teachpacks)
      (string-literal? #'file)
      (let*-values ([(module-path)
-                    (make-teachpack-require-syntax stx
-                      (text->string #'file ".rkt"))]
+                    (dracula-teachpack-syntax #:stx stx
+                      (string-append (syntax-e #'file) ".rkt"))]
                    [(imports sources) (expand-import module-path)]
                    [(names) (map import-local-id imports)])
        (with-syntax ([spec module-path]

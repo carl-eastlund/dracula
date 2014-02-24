@@ -1,9 +1,11 @@
 #lang racket
 
 (require
+  racket/require
+  (path-up "self/require.rkt")
   "do-check.rkt"
-  "../teachpacks/testing.rkt"
-  "../teachpacks/doublecheck.rkt"
+  (teachpack-in testing)
+  (teachpack-in doublecheck)
   (for-syntax
     "../proof/proof.rkt"
     "../proof/syntax.rkt"))

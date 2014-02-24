@@ -1,20 +1,20 @@
 #lang racket/base
 
 (require
-  "../private/collects.rkt"
+  racket/require
+  (path-up "self/require.rkt")
+  "dynamic-rep.rkt"
+  "keywords.rkt"
   (for-syntax
     racket/base
     racket/block
     syntax/parse
-    (cce syntax)
+    (cce-in syntax)
     "static-rep.rkt"
     "syntax-meta.rkt"
-    "list-set.rkt")
-  "dynamic-rep.rkt"
-  "keywords.rkt")
+    "list-set.rkt"))
 
-(provide link-macro)
-(provide restrict-macro)
+(provide link-macro restrict-macro)
 
 (define-for-syntax (restrict-module/static name stx mod imp-ids exp-ids)
   (define imps

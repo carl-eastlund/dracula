@@ -1,16 +1,18 @@
 #lang racket/base
 
-(require "../private/collects.rkt"
-         "../teachpacks/testing.rkt"
-         "../teachpacks/doublecheck.rkt"
-         "dynamic-rep.rkt"
-         "../lang/defun.rkt"
-         "../lang/theorems.rkt")
-
-(require (for-syntax racket/base
-                     (cce syntax)
-                     "static-rep.rkt"
-                     "syntax-meta.rkt"))
+(require
+  racket/require
+  (path-up "self/require.rkt")
+  (teachpack-in testing)
+  (teachpack-in doublecheck)
+  (dracula-in lang/defun)
+  (dracula-in lang/theorems)
+  "dynamic-rep.rkt"
+  (for-syntax
+    racket/base
+    (cce-in syntax)
+    "static-rep.rkt"
+    "syntax-meta.rkt"))
 
 (provide invoke-macro)
 

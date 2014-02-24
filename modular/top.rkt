@@ -1,16 +1,18 @@
 #lang racket/base
 
-(require "../private/collects.rkt"
-         "../lang/check.rkt"
-         "module.rkt")
-
-(require (for-syntax racket/base
-                     racket/list
-                     (cce syntax)
-                     "static-rep.rkt"
-                     "syntax-meta.rkt"
-                     "../proof/proof.rkt"
-                     "../proof/syntax.rkt"))
+(require
+  racket/require
+  (path-up "self/require.rkt")
+  (dracula-in lang/do-check)
+  "module.rkt"
+  (for-syntax
+    racket/base
+    racket/list
+    (cce-in syntax)
+    "static-rep.rkt"
+    "syntax-meta.rkt"
+    "../proof/proof.rkt"
+    "../proof/syntax.rkt"))
 
 (provide top-interaction-macro module-begin-macro)
 

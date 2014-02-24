@@ -1,8 +1,10 @@
 #lang racket/base
 
-(require racket/contract
-         "../private/collects.rkt")
-(require (cce syntax))
+(require
+  racket/contract
+  racket/require
+  (path-up "self/require.rkt")
+  (cce-in syntax))
 
 (define ((expand-keyword message) stx)
   (syntax-error stx message))

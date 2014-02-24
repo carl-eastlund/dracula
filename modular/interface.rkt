@@ -1,14 +1,16 @@
 #lang racket/base
 
-(require racket/stxparam
-         "keywords.rkt"
-         "dynamic-rep.rkt"
-         "../private/collects.rkt")
-
-(require (for-syntax racket/base
-                     (cce syntax)
-                     "static-rep.rkt"
-                     "syntax-meta.rkt"))
+(require
+  racket/stxparam
+  racket/require
+  (path-up "self/require.rkt")
+  "keywords.rkt"
+  "dynamic-rep.rkt"
+  (for-syntax
+    racket/base
+    (cce-in syntax)
+    "static-rep.rkt"
+    "syntax-meta.rkt"))
 
 (provide interface-macro)
 
