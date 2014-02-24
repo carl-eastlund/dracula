@@ -3,11 +3,13 @@
    scribble/manual
    scribble/eval
    racket/require
-   (path-up "self/module-path.rkt")
+   (path-up "self/require.rkt")
    (path-up "self/scribble.rkt")
-   "../evaluator.ss")
-@(require (for-label dracula/lang/dracula
-                     dracula/teachpacks/doublecheck))
+   (path-up "self/module-path.rkt")
+   "../evaluator.rkt"
+   (for-label
+     (dracula-in main)
+     (teachpack-in doublecheck)))
 
 @title[#:style 'quiet #:tag "doublecheck" (scheme "doublecheck")]
 

@@ -1,11 +1,19 @@
 #lang scribble/doc
-@(require scribble/manual scribble/eval "../evaluator.ss")
-@(require (for-label dracula/lang/dracula
-                     dracula/teachpacks/io-utilities))
+@(require
+   scribble/manual
+   scribble/eval
+   racket/require
+   (path-up "self/require.rkt")
+   (path-up "self/scribble.rkt")
+   (path-up "self/module-path.rkt")
+   "../evaluator.rkt"
+   (for-label
+     (dracula-in main)
+     (teachpack-in io-utilities)))
 
 @title[(scheme "io-utilities")]
 
-@(declare-exporting dracula/teachpacks/io-utilities)
+@(declare-exporting/dracula teachpacks/io-utilities)
 
 @specform[(include-book "io-utilities" :dir :teachpacks)]
 

@@ -5,7 +5,7 @@
    racket/require
    (path-up "self/require.rkt")
    (path-up "self/module-path.rkt"))
-@(require (for-label (dracula-in lang/dracula)))
+@(require (for-label (dracula-in main)))
 
 @(define-runtime-path ChosenLanguage "images/chosen-language.png")
 @(define-runtime-path fact-defn "images/fact-defn.png")

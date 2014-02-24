@@ -9,7 +9,7 @@
    "../evaluator.ss"
    "../../guide/display.rkt"
    (for-syntax scheme/base)
-   (for-label (dracula-in modular/main)))
+   (for-label (dracula-in modular)))
 
 @title[#:tag "modular"]{Modular ACL2}
 

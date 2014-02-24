@@ -1,6 +1,12 @@
 #lang scribble/doc
-@(require scribble/manual scribble/eval "../evaluator.ss")
-@(require (for-label dracula/lang/dracula))
+@(require
+   scribble/manual
+   scribble/eval
+   racket/require
+   (path-up "self/require.rkt")
+   "../evaluator.rkt"
+   (for-label
+     (dracula-in main)))
 
 @title[#:tag "alists"]{Association Lists}
 

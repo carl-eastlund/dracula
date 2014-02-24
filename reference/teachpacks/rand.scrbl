@@ -1,11 +1,19 @@
 #lang scribble/doc
-@(require scribble/manual scribble/eval "../evaluator.ss")
-@(require (for-label dracula/lang/dracula
-                     dracula/teachpacks/rand))
+@(require
+   scribble/manual
+   scribble/eval
+   racket/require
+   (path-up "self/require.rkt")
+   (path-up "self/scribble.rkt")
+   (path-up "self/module-path.rkt")
+   "../evaluator.rkt"
+   (for-label
+     (dracula-in main)
+     (teachpack-in rand)))
 
 @title[(scheme "rand")]
 
-@(declare-exporting dracula/teachpacks/rand)
+@(declare-exporting/dracula teachpacks/rand)
 
 @specform[(include-book "rand" :dir :teachpacks)]
 

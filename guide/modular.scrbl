@@ -5,7 +5,7 @@
    (path-up "self/require.rkt")
    (path-up "self/module-path.rkt")
    (dracula-in guide/display)
-   (for-label (dracula-in modular/main)))
+   (for-label (dracula-in modular)))
 
 @title[#:tag "modular"]{Modular ACL2}
 

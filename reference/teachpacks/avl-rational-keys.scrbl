@@ -1,11 +1,19 @@
 #lang scribble/doc
-@(require scribble/manual scribble/eval "../evaluator.ss")
-@(require (for-label dracula/lang/dracula
-                     dracula/teachpacks/avl-rational-keys))
+@(require
+   scribble/manual
+   scribble/eval
+   racket/require
+   (path-up "self/require.rkt")
+   (path-up "self/scribble.rkt")
+   (path-up "self/module-path.rkt")
+   "../evaluator.rkt"
+   (for-label
+     (dracula-in main)
+     (teachpack-in avl-rational-keys)))
 
 @title[(scheme "avl-rational-keys")]
 
-@(declare-exporting dracula/teachpacks/avl-rational-keys)
+@(declare-exporting/dracula teachpacks/avl-rational-keys)
 
 @specform[(include-book "avl-rational-keys" :dir :teachpacks)]
 

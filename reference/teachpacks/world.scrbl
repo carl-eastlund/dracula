@@ -1,11 +1,19 @@
 #lang scribble/doc
-@(require scribble/manual scribble/eval "../evaluator.ss")
-@(require (for-label dracula/lang/dracula
-                     dracula/teachpacks/world))
+@(require
+   scribble/manual
+   scribble/eval
+   racket/require
+   (path-up "self/require.rkt")
+   (path-up "self/scribble.rkt")
+   (path-up "self/module-path.rkt")
+   "../evaluator.rkt"
+   (for-label
+     (dracula-in main)
+     (teachpack-in world)))
 
 @title[#:style 'quiet (scheme "world")]
 
-@(declare-exporting dracula/teachpacks/world)
+@(declare-exporting/dracula teachpacks/world)
 
 @specform[(include-book "world" :dir :teachpacks)]
 
