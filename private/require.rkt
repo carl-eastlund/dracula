@@ -68,9 +68,12 @@
 
   (define-require-syntax (dracula-in stx)
     (syntax-parse stx
-      [(_ mod:id)
-       (make-dracula-require-syntax #:stx stx
-         (syntax-e (attribute mod)))])))
+      [(_ mod:id ...)
+       (define/syntax-parse [spec ...]
+         (for/list {[mod-id (in-list (attribute mod))]}
+           (make-dracula-require-syntax #:stx mod-id
+             (syntax-e mod-id))))
+       #'(combine-in spec ...)])))
 
 (module scribble racket/base)
 

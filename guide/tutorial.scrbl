@@ -1,8 +1,10 @@
 #lang scribble/doc
-@(require scribble/manual
-          scheme/runtime-path
-          "../lang/acl2-module-v.ss")
-@(require (for-label dracula/lang/dracula)))
+@(require
+   scribble/manual
+   scheme/runtime-path
+   "../private/require.rkt"
+   (dracula-in lang/acl2-module-v))
+@(require (for-label (dracula-in lang/dracula)))
 
 @(define-runtime-path ChosenLanguage "images/chosen-language.png")
 @(define-runtime-path fact-defn "images/fact-defn.png")

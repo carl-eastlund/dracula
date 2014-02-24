@@ -1,8 +1,9 @@
 #lang scribble/doc
-@(require scribble/manual
-          "display.ss"
-          "../lang/acl2-module-v.ss")
-@(require (for-label dracula/modular/main)))
+@(require
+   scribble/manual
+   "../private/require.rkt"
+   (dracula-in guide/display lang/acl2-module-v)
+@(require (for-label (dracula-in modular/main)))
 
 @title[#:tag "modular"]{Modular ACL2}
 
