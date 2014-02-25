@@ -61,10 +61,16 @@
   (define modular-reader-module
     (dracula-module-path #:version? #f 'modular/lang/reader))
 
-  (define modular-metadata-lines 1)
+  (define modular-metadata-lines 4)
 
   (define (modular-settings->metadata modname settings)
-    "#lang dracula\n")
+    (string-append
+      ";; The first four lines of this file were added by Dracula.\n"
+      ";; They tell DrScheme that this is a Dracula Modular ACL2 program.\n"
+      ";; Leave these lines unchanged so that DrScheme can properly load this file.\n"
+      (match module-path:modular-acl2
+        [(? symbol? sym) (format "#lang ~s\n" sym)]
+        [(list 'planet arg) (format "#lang planet ~s\n" arg)])))
 
   (define (modular-metadata->settings metadata default) default)
 
