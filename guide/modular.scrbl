@@ -323,7 +323,7 @@ see some extra lines at the top:
 #, @litchar{;; The first four lines of this file were added by Dracula.}
 #, @litchar{;; They tell DrScheme that this is a Dracula Modular ACL2 program.}
 #, @litchar{;; Leave these lines unchanged so that DrScheme can properly load this file.}
-#, @litchar{#reader(lib "dracula" "modular" "lang" "reader.ss")}
+#, @litchar{#lang dracula/modular}
 (interface ITriple
   (sig triple (x))
   (con times-three
