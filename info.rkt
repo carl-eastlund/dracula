@@ -6,7 +6,7 @@
 
 ;; Planet:
 (define blurb (list "Dracula: ACL2 theorem prover tools in DrRacket"))
-(define release-notes (list "8.24: updated to share code with package release"))
+(define release-notes (list "8.25: updated modular acl2 file metadata"))
 (define categories '(devtools scientific))
 (define primary-file "main.rkt")
 (define repositories '("4.x"))
