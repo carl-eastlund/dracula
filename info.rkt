@@ -6,7 +6,7 @@
 
 ;; Planet:
 (define blurb (list "Dracula: ACL2 theorem prover tools in DrRacket"))
-(define release-notes (list "8.25: updated modular acl2 file metadata"))
+(define release-notes (list "8.26: fix unbound id error message"))
 (define categories '(devtools scientific))
 (define primary-file "main.rkt")
 (define repositories '("4.x"))

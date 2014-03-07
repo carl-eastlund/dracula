@@ -12,4 +12,4 @@
      (keyword-syntax? #'keyword)
      (syntax/loc stx (#%datum . keyword))]
     [(_ . top)
-     (syntax/loc stx (top/error . top))]))
+     (syntax/loc stx (#%top . top))]))
