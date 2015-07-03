@@ -15,6 +15,7 @@ unit testing.
 @include-section["binary-io-utilities.scrbl"]
 @include-section["doublecheck.scrbl"]
 @include-section["io-utilities.scrbl"]
+@include-section["j-bob.scrbl"]
 @include-section["list-utilities.scrbl"]
 @include-section["rand.scrbl"]
 @include-section["testing.scrbl"]
