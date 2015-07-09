@@ -17,5 +17,5 @@
 
 @specform[(include-book "j-bob-lang" :dir :teachpacks)]
 
-This teachpack provides definitions of @racket[dethm] and @racket[size] used in
+This teachpack provides the definition of the language used in
 @link["http://the-little-prover.org/"]{The Little Prover} (MIT Press, 2015).
