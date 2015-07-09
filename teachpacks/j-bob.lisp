@@ -1,27 +1,5 @@
 (in-package "ACL2")
-
-(defun if->implies (exp hyps)
-  (case-match exp
-    (('if Q A E)
-     (append
-       (if->implies A `(,@hyps ,Q))
-       (if->implies E `(,@hyps (not ,Q)))))
-    (('equal X Y)
-     `((:rewrite :corollary
-         (implies (and ,@hyps)
-           (equal ,X ,Y)))))
-    (& '())))
-
-(defmacro dethm (name args body)
-  (declare (ignore args))
-  (let ((rules (if->implies body '())))
-    `(defthm ,name ,body
-       :rule-classes ,rules)))
-
-(defun size (x)
-  (if (atom x)
-    '0
-    (+ '1 (size (car x)) (size (cdr x)))))
+(include-book "j-bob-lang")
 
 (defun list0 () '())
 (defun list0? (x) (equal x '()))
@@ -386,6 +364,7 @@
       'nil)))
 
 (defun defs? (known-defs defs)
+  (declare (xargs :measure (size defs)))
   (if (atom defs)
     't
     (if (def? known-defs (car defs))
@@ -411,6 +390,7 @@
     'nil))
 
 (defun proofs? (defs pfs)
+  (declare (xargs :measure (size pfs)))
   (if (atom pfs)
     't
     (if (proof? defs (car pfs))
@@ -761,6 +741,7 @@
     e))
 
 (defun rewrite/prove+ (defs pfs)
+  (declare (xargs :measure (size pfs)))
   (if (atom pfs)
     (quote-c 't)
     (rewrite/prove+1 defs (car pfs)
@@ -775,6 +756,7 @@
     defs))
 
 (defun rewrite/define+1 (defs1 defs2 pfs)
+  (declare (xargs :measure (size pfs)))
   (if (equal defs1 defs2)
     defs1
     (if (atom pfs)
@@ -787,6 +769,7 @@
         (cdr pfs)))))
 
 (defun rewrite/define+ (defs pfs)
+  (declare (xargs :measure (size pfs)))
   (if (atom pfs)
     defs
     (rewrite/define+1 defs

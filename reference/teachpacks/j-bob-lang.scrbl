@@ -9,13 +9,13 @@
    "../evaluator.rkt"
    (for-label
      (dracula-in main)
-     (teachpack-in j-bob)))
+     (teachpack-in j-bob-lang)))
 
-@title[(scheme "j-bob")]
+@title[(scheme "j-bob-lang")]
 
-@(declare-exporting/dracula teachpacks/j-bob)
+@(declare-exporting/dracula teachpacks/j-bob-lang)
 
-@specform[(include-book "j-bob" :dir :teachpacks)]
+@specform[(include-book "j-bob-lang" :dir :teachpacks)]
 
-This teachpack provides the proof assistant "J-Bob" from
+This teachpack provides definitions of @racket[dethm] and @racket[size] used in
 @link["http://the-little-prover.org/"]{The Little Prover} (MIT Press, 2015).

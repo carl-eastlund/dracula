@@ -9,13 +9,13 @@
    "../evaluator.rkt"
    (for-label
      (dracula-in main)
-     (teachpack-in j-bob)))
+     (teachpack-in little-prover)))
 
-@title[(scheme "j-bob")]
+@title[(scheme "little-prover")]
 
-@(declare-exporting/dracula teachpacks/j-bob)
+@(declare-exporting/dracula teachpacks/little-prover)
 
-@specform[(include-book "j-bob" :dir :teachpacks)]
+@specform[(include-book "little-prover" :dir :teachpacks)]
 
-This teachpack provides the proof assistant "J-Bob" from
+This teachpack provides definitions of all of the proofs in
 @link["http://the-little-prover.org/"]{The Little Prover} (MIT Press, 2015).
