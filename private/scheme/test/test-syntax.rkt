@@ -2,7 +2,7 @@
 
 (require mzlib/etc
          planet/util
-         syntax/location
+         (only-in syntax/location quote-source-file)
          "checks.ss"
          "../syntax.ss")
 
