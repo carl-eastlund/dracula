@@ -102,7 +102,10 @@
     (define ns (namespace-anchor->namespace the-anchor))
     (define mod
       ((current-module-name-resolver)
-       'rackunit/private/gui/drracket-link #false #false))
+       'rackunit/private/gui/drracket-link
+       #false
+       #false
+       #true))
     (lambda ()
       (namespace-attach-module ns mod)))
 

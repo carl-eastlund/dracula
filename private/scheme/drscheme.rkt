@@ -156,7 +156,10 @@
             (namespace-anchor->namespace the-anchor))
           (define mod
             ((current-module-name-resolver)
-             'test-engine/scheme-tests #false #false))
+             'test-engine/scheme-tests
+             #false
+             #false
+             #true))
           (lambda ()
             (namespace-attach-module ns mod)
             (namespace-require mod)
