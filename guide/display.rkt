@@ -1,5 +1,6 @@
 #lang racket/base
 (require (for-syntax racket/base)
+         syntax/strip-context
          scribble/eval
          scribble/manual
          scribble/decode
@@ -17,7 +18,10 @@
   (syntax-case stx ()
     [(_ (def ...) (int ...))
      (syntax/loc stx
-       (interaction #:eval (modular-evaluator 'def ...) int ...))]))
+       (interaction
+         #:eval
+         (modular-evaluator (strip-context #'def) ...)
+         int ...))]))
 
 (define-syntax (show/eval stx)
   (syntax-case stx ()
