@@ -31,6 +31,13 @@
 
 (provide module-macro)
 
+(define-for-syntax (reloc stx #:src src)
+  (datum->syntax stx (syntax-e stx) src stx))
+
+(define-for-syntax (reloc* stxs #:src src)
+  (for/list {[stx (in-list stxs)]}
+    (reloc stx #:src src)))
+
 (define-for-syntax (matcher . ids)
   (let* ([table (make-free-identifier-mapping)])
     (for ([id ids])
@@ -49,15 +56,15 @@
          [externals (port/static-sig-names/external port)]
          [arguments (port/static-sig-args port)])
     (with-syntax ([exp/dynamic id]
-                  [puts externals]
-                  [gets internals])
+                  [(put ...) (reloc* #:src source externals)]
+                  [(get ...) (reloc* #:src source internals)])
       (values
        concrete
        (syntax/loc source
          (define-values ()
            (begin
-             (for ([sym (in-list 'puts)]
-                   [fun (in-list (unchecked-arity (list . gets)))])
+             (for ([sym (in-list '(put ...))]
+                   [fun (in-list (unchecked-arity (list get ...)))])
                (interface/dynamic-put-function! exp/dynamic sym fun))
              (values))))
         #'(begin)))))
@@ -70,10 +77,12 @@
          [arguments (port/static-sig-args port)]
          [axioms (port/static-con-names/internal port)])
     (with-syntax ([imp/dynamic id]
-                  [gets externals]
-                  [(put ...) internals]
-                  [(tmp ...) (generate-temporaries externals)]
-                  [(args ...) arguments]
+                  [(get ...) (reloc* #:src source externals)]
+                  [(put ...) (reloc* #:src source internals)]
+                  [(tmp ...) (reloc* #:src source
+                               (generate-temporaries externals))]
+                  [(args ...) (map (lambda (arg) (reloc* #:src source arg))
+                                arguments)]
                   [axs axioms])
       (values
        abstract
@@ -81,7 +90,7 @@
          (begin
            (define-values [tmp ...]
              (apply values
-               (for/list ([sym (in-list 'gets)])
+               (for/list ([sym (in-list '(get ...))])
                  (interface/dynamic-get-function imp/dynamic sym))))
            ;; combining multiple imported functions into one definition
            (mutual-recursion (defun put args (tmp . args)) ...)
