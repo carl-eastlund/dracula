@@ -11,31 +11,6 @@
 (provide language-level^
          language-level@)
 
-(define (read-all-syntax [port (current-input-port)]
-                         [source (object-name port)]
-                         [reader read-syntax])
-  (let loop ()
-    (let* ([next (reader source port)])
-      (if (eof-object? next)
-          null
-          (cons next (loop))))))
-
-(define (read-module-body [port (current-input-port)]
-                          [source (object-name port)]
-                          [reader read-syntax]
-                          [path 'scheme]
-                          [name 'program])
-  (let*-values ([(line-1 col-1 pos-1) (port-next-location port)]
-                [(terms) (read-all-syntax port source reader)]
-                [(line-2 col-2 pos-2) (port-next-location port)]
-                [(loc) (list source line-1 col-1 pos-1
-                             (and pos-1 pos-2 (- pos-2 pos-1)))])
-    (map (lambda (datum) (datum->syntax #'here datum loc))
-         (list `(module ,name ,path
-                  (,(datum->syntax #f '#%module-begin) ,@terms))
-               `(require ',name)
-               `(current-namespace (module->namespace '',name))))))
-
 (define-namespace-anchor the-anchor)
 
 (define-signature language-level^
@@ -43,7 +18,6 @@
    make-language-level
    language-level-render-mixin
    language-level-capability-mixin
-   language-level-eval-as-module-mixin
    language-level-no-executable-mixin
    language-level-macro-stepper-mixin
    language-level-check-expect-mixin
@@ -108,29 +82,6 @@
          (format "Sorry, ~a does not support creating executables."
                  (get-language-name))
          #f '(ok stop)))))
-
-  (define language-level-eval-as-module-mixin
-    (mixin (drscheme:language:language<%>
-            drscheme:language:module-based-language<%>) ()
-      (super-new)
-
-      (inherit get-reader get-module)
-
-      (define/override (front-end/complete-program port settings)
-        (let* ([terms #f])
-          (lambda ()
-            ;; On the first run through, initialize the list.
-            (unless terms
-              (set! terms (read-module-body port
-                                            (object-name port)
-                                            (get-reader)
-                                            (get-module))))
-            ;; Produce each list element in order.
-            (if (pair? terms)
-                ;; Produce and remove a list element.
-                (begin0 (car terms) (set! terms (cdr terms)))
-                ;; After null, eof forever.
-                eof))))))
 
   (define language-level-macro-stepper-mixin
     (language-level-capability-mixin

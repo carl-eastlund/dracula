@@ -119,7 +119,6 @@
            #:reader acl2-read-syntax
            (language-level-render-mixin acl2-convert #f)
            (language-level-capability-mixin acl2-capabilities)
-           language-level-eval-as-module-mixin
            ;;language-level-no-executable-mixin
            ;;language-level-macro-stepper-mixin
            language-level-check-expect-mixin
