@@ -16,7 +16,26 @@
 ;; Package:
 
 (define collection "dracula")
-(define deps '["planet-schematics-random1"])
+(define deps
+  '[
+    "planet-schematics-random1"
+    "base"
+    "compatibility-lib"
+    "drracket"
+    "drracket-plugin-lib"
+    "gui-lib"
+    "htdp-lib"
+    "planet-lib"
+    "rackunit-gui"
+    "rackunit-lib"
+    "sandbox-lib"
+    "scheme-lib"
+    "scribble-lib"
+    "slideshow-lib"
+    "srfi-lib"
+    "srfi-lite-lib"
+    "string-constants-lib"
+    ])
 
 ;; tools:
 
