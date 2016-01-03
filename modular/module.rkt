@@ -73,7 +73,7 @@
                   [(get ...) (reloc* #:src source externals)]
                   [(put ...) (reloc* #:src source internals)]
                   [(tmp ...) (reloc* #:src source
-                               (generate-temporaries externals))]
+                               (fresh-ids externals))]
                   [(args ...) (map (lambda (arg) (reloc* #:src source arg))
                                 arguments)]
                   [axs axioms])
@@ -102,7 +102,7 @@
                    [(names) (map import-local-id imports)])
        (with-syntax ([spec module-path]
                      [(name ...) names]
-                     [(temp ...) (generate-temporaries names)])
+                     [(temp ...) (fresh-ids names)])
          (values stx
                  (syntax/loc stx (rename-below [temp name] ...))
                  (syntax/loc stx (require (rename-in spec [name temp] ...))))))]

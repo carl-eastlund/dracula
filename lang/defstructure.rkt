@@ -5,7 +5,8 @@
   (path-up "self/require.rkt")
   "defun.rkt"
   (for-syntax
-    (cce-in text)))
+    (cce-in text)
+    (cce-in syntax)))
 
 (provide defstructure)
 
@@ -97,7 +98,7 @@
 (define-for-syntax (expand-defstructure stx)
   (syntax-case stx (:options)
     [(ds name field-spec ... (:options opts ...))
-     (with-syntax ([(formal ...) (generate-temporaries #'(field-spec ...))]
+     (with-syntax ([(formal ...) (fresh-ids* #'(field-spec ...))]
                    [ctor-name-id (make-ctor-name #'name)]
                    [weak-predicate-name-id (make-weak-predicate-name #'name)]
                    [predicate-name-id (make-predicate-name #'name)]
@@ -113,11 +114,13 @@
                    [(offset-num ...) (make-field-offsets 
                                       (syntax->list #'(field-spec ...)))])
        (with-syntax ([(internal-ctor internal-weak internal-pred internal-updater) 
-                      (generate-temporaries #'(ctor-name-id weak-predicate-name-id
-                                                            predicate-name-id
-                                                            updater-name-id))]
+                      (fresh-ids*
+                        #'[ctor-name-id
+                           weak-predicate-name-id
+                           predicate-name-id
+                           updater-name-id])]
                      [(internal-selector ...)
-                      (generate-temporaries #'(selector-name-id ...))])
+                      (fresh-ids* #'(selector-name-id ...))])
          #'(begin
              (define (internal-ctor formal ...)
                (list (quote name) formal ...))

@@ -237,6 +237,15 @@
         src-vector/c
         #f))
 
+(define (fresh-ids ids)
+  (for/list {[id (in-list ids)]}
+    ((make-syntax-introducer)
+     (to-syntax (syntax-e id) #:src id))))
+
+(define (fresh-ids* stx)
+  (to-syntax #:src stx
+    (fresh-ids (syntax-e stx))))
+
 (provide/contract
 
  [src/c contract?]
@@ -257,6 +266,9 @@
        [#:stx stx/f #:src src/c #:ctxt stx/f #:prop stx/f #:cert stx/f]
        syntax?)]
  [to-datum (-> any/c (not/c syntax?))]
+ [fresh-ids (-> (listof identifier?) (listof identifier?))]
+ [fresh-ids*
+  (-> (syntax/c (listof identifier?)) (syntax/c (listof identifier?)))]
 
  [syntax-source-file-name (-> syntax? (or/c path? #f))]
  [syntax-source-directory (-> syntax? (or/c path? #f))]

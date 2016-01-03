@@ -41,7 +41,7 @@ operator position (or acl2-provide/contract).  Also does arity checking.
        (for* ([ids (in-list (syntax->list #'((function ...) args ...)))]
               [id (in-list (syntax->list ids))])
          (enforce-valid-name! orig-stx id))
-       (with-syntax ([(checked ...) (generate-temporaries #'(function ...))]
+       (with-syntax ([(checked ...) (fresh-ids* #'(function ...))]
                      [(arity ...) (map length (syntax->datum #'(args ...)))])
          (quasisyntax/loc orig-stx
            (begin

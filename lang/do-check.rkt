@@ -98,7 +98,7 @@
 (define-syntax (define-values-below stx)
   (syntax-parse stx
     [(_ [below:id ...] body:expr)
-     (with-syntax* ([(above ...) (generate-temporaries #'(below ...))])
+     (with-syntax* ([(above ...) (fresh-ids* #'(below ...))])
        #`(begin
            (rename-below [above below] ...)
            (define-values [above ...] body)))]))
@@ -111,7 +111,7 @@
      (define specs #'(only-meta-in 0 spec ...))
      (define-values [ imports sources ] (expand-import specs))
      (define names (map import-local-id imports))
-     (define temps (generate-temporaries names))
+     (define temps (fresh-ids names))
      (with-syntax ([(name ...) names]
                    [(temp ...) temps])
        #`(begin

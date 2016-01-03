@@ -46,7 +46,7 @@
              (with-syntax {[dynamic module/dynamic]
                            [(fn ...)
                             (map refresh-identifier (apply append fns))]
-                           [(tmp ...) (generate-temporaries (apply append fns))]
+                           [(tmp ...) (fresh-ids (apply append fns))]
                            [(args ...) (apply append args)]
                            [ths (map refresh-identifier (apply append ths))]}
                (syntax/loc stx
