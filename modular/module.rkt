@@ -126,7 +126,7 @@
     [(export/static? body) (expand-module-export body exp)]
     [else (expand-definition body)]))
 
-(define-syntax (expand-dynamic stx)
+(define-syntax (define-dynamic stx)
   (syntax-case stx ()
     [(_ static-name)
      (let* ([import-name #'imp/dynamic]
@@ -205,7 +205,7 @@
             (parse-body (cons port prior) stxs)))]
        [_ (cons stx (parse-body prior stxs))])]))
 
-(define-syntax (expand-static stx)
+(define-syntax (define-static stx)
   (syntax-case stx ()
     [(_ static-name dynamic-name original def ...)
      (syntax/loc #'original

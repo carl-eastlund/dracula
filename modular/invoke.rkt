@@ -21,11 +21,15 @@
     (syntax-case stx ()
       [(_ mod)
        (begin
-         (unless (and
-                   (identifier? #'mod)
-                   (syntax-meta? (syntax-local-value #'mod (lambda () #f)))
-                   (module/static? (syntax->meta #'mod)))
-           (syntax-error #'mod "expected the name of a module here"))
+         (unless (identifier? #'mod)
+           (syntax-error #'mod
+             "expected a module name, got a non-identifier"))
+         (unless (syntax-meta? (syntax-local-value #'mod (lambda () #f)))
+           (syntax-error #'mod
+             "expected a module name, got a dynamic definition"))
+         (unless (module/static? (syntax->meta #'mod))
+           (syntax-error #'mod
+             "expected a module name, got the name of something else"))
          (let* {[module/static (syntax->meta #:message "not a module" #'mod)]
                 [module/dynamic (module/static-dynamic module/static)]
                 [imports/static (module/static-imports module/static)]
