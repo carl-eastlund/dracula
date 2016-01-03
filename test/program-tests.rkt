@@ -5,6 +5,7 @@
   mred/mred
   rackunit
   racket/require
+  (only-in (combine-in dracula dracula/modular))
   (path-up "self/require.rkt")
   (cce-in main))
 
@@ -167,10 +168,19 @@
   (lambda (path body [rest null])
     (make-program/mred (append (top-level->module path body) rest))))
 
+(define-namespace-anchor dracula-anchor)
+(define (dracula-ns)
+  (namespace-anchor->namespace dracula-anchor))
+
+(define (attach-dracula ns)
+  (namespace-attach-module (dracula-ns) 'dracula ns)
+  (namespace-attach-module (dracula-ns) 'dracula/modular ns)
+  ns)
+
 ;; execute : (-> Namespace) (Listof Term) -> ProgramResults
 ;; Execute terms in a given namespace and report their results.
 (define (execute gen-ns terms)
-  (parameterize ([current-namespace (gen-ns)]
+  (parameterize ([current-namespace (attach-dracula (gen-ns))]
                  [current-custodian (make-custodian)])
     (begin0
       (execute-terms terms)
