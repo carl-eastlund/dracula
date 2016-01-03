@@ -21,32 +21,34 @@
     (syntax-case stx ()
       [(_ mod)
        (begin
-         (unless (and (identifier? #'mod)
-                      (syntax-meta? (syntax-local-value #'mod (lambda () #f)))
-                      (module/static? (syntax->meta #'mod)))
+         (unless (and
+                   (identifier? #'mod)
+                   (syntax-meta? (syntax-local-value #'mod (lambda () #f)))
+                   (module/static? (syntax->meta #'mod)))
            (syntax-error #'mod "expected the name of a module here"))
-         (let* ([module/static (syntax->meta #:message "not a module" #'mod)]
+         (let* {[module/static (syntax->meta #:message "not a module" #'mod)]
                 [module/dynamic (module/static-dynamic module/static)]
                 [imports/static (module/static-imports module/static)]
-                [exports/static (module/static-exports module/static)])
+                [exports/static (module/static-exports module/static)]}
            (unless (null? imports/static)
              (syntax-error
-              #'mod
-              (format "unresolved imports:\n~s\nfrom exports:\n~s\n"
-                      (map (lambda (port)
-                             (map syntax-e (port/static-sig-names/external port)))
-                           imports/static)
-                      (map (lambda (port)
-                             (map syntax-e (port/static-sig-names/external port)))
-                           exports/static))))
+               #'mod
+               (format "unresolved imports:\n~s\nfrom exports:\n~s\n"
+                 (map (lambda (port)
+                        (map syntax-e (port/static-sig-names/external port)))
+                   imports/static)
+                 (map (lambda (port)
+                        (map syntax-e (port/static-sig-names/external port)))
+                   exports/static))))
            (let* ([fns (map port/static-sig-names/external exports/static)]
                   [args (map port/static-sig-args exports/static)]
                   [ths (map port/static-con-names/external exports/static)])
-             (with-syntax ([dynamic module/dynamic]
-                           [(fn ...) (map refresh-identifier (apply append fns))]
+             (with-syntax {[dynamic module/dynamic]
+                           [(fn ...)
+                            (map refresh-identifier (apply append fns))]
                            [(tmp ...) (generate-temporaries (apply append fns))]
                            [(args ...) (apply append args)]
-                           [ths (map refresh-identifier (apply append ths))])
+                           [ths (map refresh-identifier (apply append ths))]}
                (syntax/loc stx
                  (begin
                    (define impl
