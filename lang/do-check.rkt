@@ -79,9 +79,10 @@
               (set-box! marker #f)))))]))
 
 (define-for-syntax ((check-below-transformer marker f) stx)
-  (unless (unbox (syntax-local-value marker))
-    (raise-syntax-error #f
-      "used before definition" stx))
+  (when (syntax-parameter-value #'check-arity?)
+    (unless (unbox (syntax-local-value marker))
+      (raise-syntax-error #f
+        "used before definition" stx)))
   (f stx))
 
 (define-syntax (rename-below stx)
