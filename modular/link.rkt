@@ -96,12 +96,16 @@
                (block
                  (define one/static
                    (syntax->meta #:message "not a module" #'one))
-                 (define one/dynamic (module/static-dynamic one/static))
+                 (define one/dynamic
+                   (refresh-identifier
+                     (module/static-dynamic one/static)))
                  (define one/imports (module/static-imports one/static))
                  (define one/exports (module/static-exports one/static))
                  (define two/static
                    (syntax->meta #:message "not a module" #'two))
-                 (define two/dynamic (module/static-dynamic two/static))
+                 (define two/dynamic
+                   (refresh-identifier
+                     (module/static-dynamic two/static)))
                  (define two/imports (module/static-imports two/static))
                  (define two/exports (module/static-exports two/static))
                  (for* {[one/import (in-list one/imports)]
