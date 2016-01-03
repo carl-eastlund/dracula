@@ -128,7 +128,7 @@
 
 (define-syntax (define-dynamic stx)
   (syntax-case stx ()
-    [(_ static-name)
+    [(_ static-name dynamic-name)
      (let* ([import-name #'imp/dynamic]
             [export-name #'exp/dynamic]
             [mod (syntax->meta #:message "not a module" #'static-name)]
@@ -138,9 +138,7 @@
                           ([stx (in-list (module/static-body mod))])
                         (expand-module-body import-name export-name stx))])
        (with-syntax ([(run ...) runs]
-                     [(req ...) reqs]
-                     [dynamic-name (refresh-identifier
-                                    (module/static-dynamic mod))])
+                     [(req ...) reqs])
          (annotate-part
            (make-part
              (syntax-e #'static-name)
@@ -227,6 +225,6 @@
            (syntax/loc stx
              (begin
                (define-static static-name dynamic-name original . body)
-               (define-dynamic static-name)))))])))
+               (define-dynamic static-name dynamic-name)))))])))
 
 (define-syntax module-macro expand-module)
