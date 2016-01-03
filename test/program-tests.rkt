@@ -5,7 +5,9 @@
   mred/mred
   rackunit
   racket/require
-  (only-in (combine-in dracula dracula/modular))
+  (only-in dracula)
+  (only-in dracula/modular)
+  (only-in racket/gui)
   (path-up "self/require.rkt")
   (cce-in main))
 
@@ -143,7 +145,7 @@
 ;; make-program : (Listof Term) -> Program
 ;; Produces a program in the default namespace.
 (define (make-program terms)
-  (make-program/namespace (lambda () (make-base-namespace)) terms))
+  (make-program/namespace (lambda () (base-namespace)) terms))
 
 ;; make-module-program : RequireSpec (Listof Term) [Listof Term] -> Program
 ;; Constructs a program from a path to a language, the body of a module
@@ -153,11 +155,15 @@
   (lambda (path body [rest null])
     (make-program (append (top-level->module path body) rest))))
 
+(define-namespace-anchor anchor)
+(define (base-namespace) (namespace-anchor->namespace anchor))
+(define (gui-namespace) (base-namespace))
+
 ;; make-program/mred : (Listof Term) -> Program
 ;; Produces a program in the default namespace, with MrEd attached.
 (define (make-program/mred terms)
   (make-program/namespace
-   (lambda () (make-gui-namespace))
+   (lambda () (gui-namespace))
    terms))
 
 ;; make-module-program/mred : RequireSpec (Listof Term) [Listof Term] -> Program
@@ -168,19 +174,10 @@
   (lambda (path body [rest null])
     (make-program/mred (append (top-level->module path body) rest))))
 
-(define-namespace-anchor dracula-anchor)
-(define (dracula-ns)
-  (namespace-anchor->namespace dracula-anchor))
-
-(define (attach-dracula ns)
-  (namespace-attach-module (dracula-ns) 'dracula ns)
-  (namespace-attach-module (dracula-ns) 'dracula/modular ns)
-  ns)
-
 ;; execute : (-> Namespace) (Listof Term) -> ProgramResults
 ;; Execute terms in a given namespace and report their results.
 (define (execute gen-ns terms)
-  (parameterize ([current-namespace (attach-dracula (gen-ns))]
+  (parameterize ([current-namespace (gen-ns)]
                  [current-custodian (make-custodian)])
     (begin0
       (execute-terms terms)

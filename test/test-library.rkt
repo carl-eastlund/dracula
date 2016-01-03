@@ -676,7 +676,7 @@
       (test-dracula (if (< 3 0) 'yes 'no) 'no)
       (test-dracula (let ((x 4)) (+ x 6)) 10)
       (test-dracula (let ((a 1) (b 2)) (+ a b)) 3)
-      (test-dracula-syntax-error (let ((a 1) (b (1+ a))) b))
+      (test-dracula-error (let ((a 1) (b (1+ a))) b))
       (test-dracula (let* ((x 4)) (+ x 6)) 10)
       (test-dracula (let* ((a 1) (b 2)) (+ a b)) 3)
       (test-dracula (let* ((a 1) (b (1+ a))) b) 2)
