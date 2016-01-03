@@ -3,6 +3,7 @@
          scheme/match
          scheme/contract
          scheme/list
+         syntax/location
          syntax/stx
          syntax/kerncase
          setup/main-collects
@@ -28,7 +29,7 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define (syntax-source-directory stx)
+(define-if-unbound (syntax-source-directory stx)
   (match (syntax-source stx)
     [(? path-string? source)
      (let-values ([(base file dir?) (split-path source)])
@@ -38,7 +39,7 @@
                                      (current-directory)))))]
     [_ #f]))
 
-(define (syntax-source-file-name stx)
+(define-if-unbound (syntax-source-file-name stx)
   (match (syntax-source stx)
     [(? path-string? f)
      (let-values ([(base file dir?) (split-path f)]) file)]
@@ -270,8 +271,6 @@
  [fresh-ids*
   (-> (syntax/c (listof identifier?)) (syntax/c (listof identifier?)))]
 
- [syntax-source-file-name (-> syntax? (or/c path? #f))]
- [syntax-source-directory (-> syntax? (or/c path? #f))]
  [syntax-source-planet-package
   (-> syntax? (or/c (list/c string? string? nat/c nat/c) #f))]
  [syntax-source-planet-package-owner (-> syntax? (or/c string? #f))]
@@ -296,4 +295,8 @@
                     #:rest list?
                     none/c)])
 
-(provide with-syntax* syntax-list)
+(provide
+  with-syntax*
+  syntax-list
+  syntax-source-file-name
+  syntax-source-directory)

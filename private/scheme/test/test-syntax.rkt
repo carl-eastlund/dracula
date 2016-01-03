@@ -4,9 +4,7 @@
          planet/util
          syntax/location
          "checks.ss"
-         (except-in "../syntax.ss"
-           syntax-source-file-name
-           syntax-source-directory))
+         "../syntax.ss")
 
 (provide syntax-suite)
 
