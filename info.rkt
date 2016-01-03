@@ -35,6 +35,7 @@
     "srfi-lib"
     "srfi-lite-lib"
     "string-constants-lib"
+    "racket-doc"
     ])
 
 ;; tools:
