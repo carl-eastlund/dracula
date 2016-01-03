@@ -31,13 +31,6 @@
 
 (provide module-macro)
 
-(define-for-syntax (reloc stx #:src src)
-  (datum->syntax stx (syntax-e stx) src stx))
-
-(define-for-syntax (reloc* stxs #:src src)
-  (for/list {[stx (in-list stxs)]}
-    (reloc stx #:src src)))
-
 (define-for-syntax (matcher . ids)
   (let* ([table (make-free-identifier-mapping)])
     (for ([id ids])

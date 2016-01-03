@@ -25,7 +25,16 @@
         (syntax-meta-value meta)
         (err))))
 
+(define (reloc stx #:src src)
+  (datum->syntax stx (syntax-e stx) src stx))
+
+(define (reloc* stxs #:src src)
+  (for/list {[stx (in-list stxs)]}
+    (reloc stx #:src src)))
+
 (provide/contract
+ [reloc (-> syntax? #:src syntax? syntax?)]
+ [reloc* (-> (listof syntax?) #:src syntax? (listof syntax?))]
  [expand-keyword (-> string? (-> syntax? syntax?))]
  [refresh-identifier (-> identifier? identifier?)]
  [syntax-meta? (-> any/c boolean?)]
